@@ -1,38 +1,32 @@
+require('dotenv').config({ path: './backend/.env' });
+const client = process.env.MONGO_DB_URI;
+console.log(client)
+const mongoose = require("mongoose");
 
-const { MongoClient } = require('mongodb');
-require('dotenv').config({ path: '../backend/.env' });
-const client = new MongoClient(process.env.MONGO_DB_URI);
+// const connectToDatabase = async () => {
+//   await mongoose.connect(
+//     client,
+//     (error) => {
+//       if (error) {
+//         return console.log(
+//           "Ocorreu um erro ao se conectar com o banco de dados: ",
+//           error
+//         );
+//       }
 
-const DataBase = {
-    connectToDatabase: async () => {
-        try {
-            await client.connect().then(() => {
-                console.log('Conectado ao MongoDB!');
-            });     
-        } catch (error) {
-            console.error('Erro ao conectar ao MongoDB:', error);
-        }
-    },
-    findUser: async (email, passoword) => {
-        try {
-            this.connectToDatabase;
-            const result = await client.db('Userlog').collection("Users").findOne({email: email, password: passoword})
-            console.log(`achou ${JSON.stringify(result)} db.js`);
-            return result;
-        }catch (error) {
-            console.error(`Usuario: ${email}`, error);
-        }
-    },
-    deleteUserDB: async (email, password) => {
-        try {
-            this.connectToDatabase;
-            const result = await client.db('Userlog').collection("Users").deleteOne({email: email, password: password})
-        }catch (error) {
-            console.error(`Usuario: ${email}`, error);
-        }
-    }
-}
+//       return console.log("Conexão ao banco de dados realizada com sucesso!");
+//     }
+//   );
+// };
 
-DataBase.connectToDatabase();
+const connectToDatabase = async () => {
+  await mongoose.connect(client).then(() => {
+    console.log('Conectado ao MongoDB!');
+  })
+  .catch((error) => {
+    console.error('Erro ao conectar ao MongoDB:', error);
+  })};
 
-module.exports = DataBase;
+module.exports = connectToDatabase;
+
+
