@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo de Posição no Array</title>
+</head>
+<body>
+    <div id="pai">
+        <div class="filho">Div 1</div>
+        <div class="filho">Div 2</div>
+        <div class="filho">Div 3</div>
+    </div>
+
+    <script>
+        document.getElementById('pai').addEventListener('click', function(event) {
+            if (event.target.classList.contains('filho')) {
+                var filhos = Array.from(document.getElementsByClassName('filho'));
+                var posicao = filhos.indexOf(event.target);
+                alert('Você clicou na posição: ' + posicao);
+            }
+        });
+    </script>
+</body>
+</html>

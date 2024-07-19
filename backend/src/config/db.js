@@ -1,6 +1,5 @@
-
-const { MongoClient } = require('mongodb');
 require('dotenv').config({ path: '../backend/.env' });
+const { MongoClient } = require('mongodb');
 const client = new MongoClient(process.env.MONGO_DB_URI);
 
 const DataBase = {
@@ -16,13 +15,25 @@ const DataBase = {
     findUser: async (email, passoword) => {
         try {
             this.connectToDatabase;
-            const result = await client.db('Userlog').collection("Users").findOne({email: email, password: passoword})
+            const result = await client.db('quester').collection('users_quester').findOne({email: email, password: passoword});
             console.log(`achou ${JSON.stringify(result)} db.js`);
             return result;
         }catch (error) {
             console.error(`Usuario: ${email}`, error);
         }
     },
+
+    insertUser: async (email, passoword) => {
+        try {
+            this.connectToDatabase;
+            const result = await client.db('quester').collection('users_quester').insertOne({email: email, password: passoword});
+            console.log(`achou ${JSON.stringify(result)} db.js`);
+            return result;
+        }catch (error) {
+            console.error(`Usuario: ${email}`, error);
+        }
+    },
+
     deleteUserDB: async (email, password) => {
         try {
             this.connectToDatabase;
