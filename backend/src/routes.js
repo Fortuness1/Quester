@@ -14,4 +14,8 @@ routes.post('/signup', controllers.getUser);
 
 routes.post('/signin', controllers.setUser);
 
+routes.delete('/deleteuser', controllers.deleteUser);
+
+routes.get('/alluser', controllers.AllUser);
+
 module.exports = routes;

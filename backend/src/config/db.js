@@ -12,6 +12,7 @@ const DataBase = {
             console.error('Erro ao conectar ao MongoDB:', error);
         }
     },
+
     findUser: async (email, passoword) => {
         try {
             this.connectToDatabase;
@@ -37,11 +38,21 @@ const DataBase = {
     deleteUserDB: async (email, password) => {
         try {
             this.connectToDatabase;
-            const result = await client.db('Userlog').collection("Users").deleteOne({email: email, password: password})
+            const result = await client.db('quester').collection('users_quester').deleteOne({email: email})
         }catch (error) {
             console.error(`Usuario: ${email}`, error);
         }
-    }
+    },
+    findAll: async () => {
+        try {
+            this.connectToDatabase;
+            const result = await client.db('quester').collection('users_quester').find().toArray();
+            console.log(`achou ${JSON.stringify(result)} db.js`);
+            return result;
+        }catch (error) {
+            console.error(`Usuario: ${email}`, error);
+        }
+    },
 }
 
 DataBase.connectToDatabase();

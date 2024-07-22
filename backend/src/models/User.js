@@ -35,6 +35,35 @@ const User = {
             console.log(error);
         }
     },
+    deleteUser: async (email, passoword) => {
+        const emailUser = email.toLowerCase();
+        const passowordUser = passoword.toLowerCase();
+        try{
+            const user = await db.deleteUserDB(emailUser, passowordUser);
+            if(user != null){
+                console.log(user);
+                return user;
+            }
+        }catch (error) {
+            console.log('User not found catch plyerModels.js');
+            console.log(error);
+        }
+    },
+    allUser: async () => {
+        try{
+            const user = await db.findAll();
+            if(user != null){
+                console.log(user);
+                return user;
+            }else {
+                console.log('User not found valor = null playerModels.js');
+                return false;
+            }
+        }catch (error) {
+            console.log('User not found catch plyerModels.js');
+            console.log(error);
+        }
+    },
 };
 
 module.exports = User;
