@@ -35,12 +35,16 @@ const DataBase = {
         }
     },
 
-    deleteUserDB: async (email, password) => {
+    deleteUserDB: async (req) => {
         try {
+            var delet = req.body;
+            console.log(delet);
             this.connectToDatabase;
-            const result = await client.db('quester').collection('users_quester').deleteOne({email: email})
+            const result = await client.db('quester').collection('users_quester').deleteMany(delet)
+            console.log(`${result.deletedCount} documento(s) deletado(s)`);
+            return result;
         }catch (error) {
-            console.error(`Usuario: ${email}`, error);
+            console.error(`Usuario:`, error);
         }
     },
     findAll: async () => {

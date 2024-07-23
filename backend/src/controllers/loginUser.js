@@ -27,9 +27,8 @@ const User = {
     },
 
     deleteUser: async (req, res) => {
-        const { email, password } = req.body;
         try{
-            const user = await Usermodel.deleteUser(email, password);
+            const user = await Usermodel.deleteUser(req);
             console.log(user);
             const test = user ? res.status(201).json(user) : res.status(404).json({message: 'User not found loginuser.js'});
         }catch (error) {
@@ -39,7 +38,7 @@ const User = {
     },
     AllUser: async (req, res) => {
         try{
-            const user = await Usermodel.allUser();
+            const user = await Usermodel.allUser(req);
             console.log(user);
             const test = user ? res.status(201).json(user) : res.status(404).json({message: 'User not found loginuser.js'});
         }catch (error) {

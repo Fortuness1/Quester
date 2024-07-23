@@ -35,11 +35,9 @@ const User = {
             console.log(error);
         }
     },
-    deleteUser: async (email, passoword) => {
-        const emailUser = email.toLowerCase();
-        const passowordUser = passoword.toLowerCase();
+    deleteUser: async (req) => {
         try{
-            const user = await db.deleteUserDB(emailUser, passowordUser);
+            const user = await db.deleteUserDB(req);
             if(user != null){
                 console.log(user);
                 return user;
