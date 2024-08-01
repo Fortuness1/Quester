@@ -14,6 +14,6 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-app.listen(process.env.PORT, () => {
+app.listen(3001, () => {
     console.log(`Servidor na porta ${process.env.PORT}`);
 }); 

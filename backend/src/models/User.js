@@ -7,7 +7,7 @@ const User = {
         try{
             const user = await db.findUser(emailUser,passowordUser);
             if(user != null){
-                console.log('User logged in');
+                // console.log('User logged in');
                 return user;
             }else{
                 console.log('User not found valor = null playerModels.js');
@@ -50,6 +50,21 @@ const User = {
     allUser: async () => {
         try{
             const user = await db.findAll();
+            if(user != null){
+                console.log(user);
+                return user;
+            }else {
+                console.log('User not found valor = null playerModels.js');
+                return false;
+            }
+        }catch (error) {
+            console.log('User not found catch plyerModels.js');
+            console.log(error);
+        }
+    },
+    getInformation: async (req) => {
+        try{
+            const user = await db.findUserById(req);
             if(user != null){
                 console.log(user);
                 return user;

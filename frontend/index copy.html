@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo de Posição no Array</title>
+</head>
+<body>
+    <div id="pai">
+        <div class="filho">Div 1</div>
+        <div class="filho">Div 2</div>
+        <div class="filho">Div 3</div>
+    </div>
+
+    <form>
+        <input type="text" name="email" id="email" placeholder="email">
+        <input type="text" name="email" id="senha" placeholder="senha">
+        <input type="submit" value="Enviar">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        console.log('O DOM foi completamente carregado e analisado');
+        var id = sessionStorage.getItem("quester_idUser");
+            if(id == null){
+                alert("null");  window.location = "./index.html"; 
+            }else{ 
+                alert(id);
+                var { _id, email, password} = vai(id).then((data) => {
+                    console.log(data);
+                    document.getElementById("email").value = data.email;
+                    document.getElementById("senha").value = data.password;
+                });
+            }
+        });
+        
+
+        const vai = async (id) => {
+                const url = `http://localhost:3001/findbyid/${id}`;
+                
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET'
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Response status: ${response.status}`);
+                    }
+
+                    const json = await response.json();
+                    console.log(json);
+                    return await { _id: json._id, email: json.email, password: json.password };
+                } catch (error) {
+                    console.error(error.message + "erro catch");
+                }
+            }
+    </script>
+</body>
+</html>

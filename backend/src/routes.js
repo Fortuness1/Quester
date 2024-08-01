@@ -18,4 +18,6 @@ routes.delete('/deleteuser', controllers.deleteUser);
 
 routes.get('/alluser', controllers.AllUser);
 
+routes.get('/findbyid/:id', controllers.findUserById);
+
 module.exports = routes;

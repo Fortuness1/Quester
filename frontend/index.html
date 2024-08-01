@@ -11,13 +11,88 @@
         <div class="filho">Div 3</div>
     </div>
 
+    <form>
+        <input type="text" name="useremail" id="email" placeholder="email">
+        <input type="text" name="password" id="senha" placeholder="senha">
+        <input type="submit" value="Enviar">
+    </form>
+
+    <div id="result"></div>
+
     <script>
+       // Store
+    localStorage.setItem("lastname", "Smith");
+    // Retrieve
+    document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+
         document.getElementById('pai').addEventListener('click', function(event) {
             if (event.target.classList.contains('filho')) {
                 var filhos = Array.from(document.getElementsByClassName('filho'));
                 var posicao = filhos.indexOf(event.target);
-                alert('Você clicou na posição: ' + posicao);
+                localStorage.setItem("lastname", posicao);
+                document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+                // window.location = "./index%20copy.html";
+                // alert('Você clicou na posição: ' + posicao);
             }
+        });
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const dataUser = {
+                email: form.useremail.value,
+                password: form.password.value
+            };
+            
+            const vai = async () => {
+                const url = 'http://localhost:3000/signup';
+                console.log(url);
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dataUser)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Response status: ${response.status}`);
+                    }
+
+                    const json = await response.json();
+                    sessionStorage.setItem("quester_idUser", json);
+                    window.location = "./index%20copy.html";
+                    console.log(json);
+                } catch (error) {
+                    console.error(error.message);
+                }
+
+
+
+
+
+
+
+
+            //     // console.log(dataUser);
+            //     await fetch('http://localhost:3000/signup', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(dataUser)
+            // }).then(res => {
+            //     if (res.ok){
+            //         console.log('Login success')
+            //         // window.location.href = 'ass.html'
+            //         alert("deu certo" + res.body)
+            //         localStorage.setItem("lastname", res);
+            //         console.log(res.json())
+            //     }
+            //     else{
+            //         console.log(res + "index.html")
+            //         alert("Usuario não encontrado")
+            //     }
+            // }).catch(err => console.log(err))
+            }
+            vai();
         });
     </script>
 </body>
