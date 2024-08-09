@@ -5,11 +5,11 @@
     <title>Exemplo de Posição no Array</title>
 </head>
 <body>
-    <div id="pai">
+    <!-- <div id="pai">
         <div class="filho">Div 1</div>
         <div class="filho">Div 2</div>
         <div class="filho">Div 3</div>
-    </div>
+    </div> -->
 
     <form>
         <input type="text" name="useremail" id="email" placeholder="email">
@@ -17,24 +17,24 @@
         <input type="submit" value="Enviar">
     </form>
 
-    <div id="result"></div>
+    <!-- <div id="result"></div> -->
 
     <script>
        // Store
     localStorage.setItem("lastname", "Smith");
     // Retrieve
-    document.getElementById("result").innerHTML = localStorage.getItem("lastname");
 
-        document.getElementById('pai').addEventListener('click', function(event) {
-            if (event.target.classList.contains('filho')) {
-                var filhos = Array.from(document.getElementsByClassName('filho'));
-                var posicao = filhos.indexOf(event.target);
-                localStorage.setItem("lastname", posicao);
-                document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-                // window.location = "./index%20copy.html";
-                // alert('Você clicou na posição: ' + posicao);
-            }
-        });
+
+        // document.getElementById('pai').addEventListener('click', function(event) {
+        //     if (event.target.classList.contains('filho')) {
+        //         var filhos = Array.from(document.getElementsByClassName('filho'));
+        //         var posicao = filhos.indexOf(event.target);
+        //         localStorage.setItem("lastname", posicao);
+        //         // document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+        //         // window.location = "./index%20copy.html";
+        //         // alert('Você clicou na posição: ' + posicao);
+        //     }
+        // });
 
         const form = document.querySelector('form');
         form.addEventListener('submit', (e) => {
@@ -45,7 +45,7 @@
             };
             
             const vai = async () => {
-                const url = 'http://localhost:3000/signup';
+                const url = 'http://localhost:3001/signin';
                 console.log(url);
                 try {
                     const response = await fetch(url, {
@@ -56,6 +56,7 @@
 
                     if (!response.ok) {
                         throw new Error(`Response status: ${response.status}`);
+                        alert('Erro ao tentar cadastrar usuário');
                     }
 
                     const json = await response.json();
@@ -64,6 +65,7 @@
                     console.log(json);
                 } catch (error) {
                     console.error(error.message);
+                    alert('Erro ao tentar cadastrar usuário' + error.message);
                 }
 
 

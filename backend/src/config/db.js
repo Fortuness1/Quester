@@ -28,7 +28,7 @@ const DataBase = {
     insertUser: async (email, passoword) => {
         try {
             this.connectToDatabase;
-            const result = await client.db('quester').collection('users_quester').insertOne({email: email, password: passoword, nome: "João", "coisa_preferida": "nada"});
+            const result = await client.db('quester').collection('users_quester').insertOne({email: email, password: passoword, nome: "nicole", "coisa_preferida": "nada"});
             console.log(`achou ${JSON.stringify(result)} db.js`);
             return result;
         }catch (error) {

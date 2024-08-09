@@ -19,11 +19,11 @@ const User = {
         }
     },
     signIn: async (email, passoword) => {
-        const emailUser = email.toLowerCase();
-        const passowordUser = passoword.toLowerCase();
+        const emailUser = email;
+        const passowordUser = passoword;
         try{
             const user = await db.insertUser(emailUser, passowordUser);
-            if(user != null){
+            if(user != null) {
                 console.log('User logged in');
                 return user;
             }else{

@@ -17,6 +17,22 @@
         <input type="submit" value="Enviar">
     </form>
 
+    <p>
+        Seu ID é: <span id="id-div"></span>
+    </p>
+    <p>
+        Seu Nome é: <span id="name-div"></span>
+    </p>
+    <p>
+        Sua senha é: <span id="senha-div"></span>
+    </p>
+    <p>
+        Seu email é: <span id="email-div"></span>
+    </p>
+    <p>
+        Sua coisa preferida é: <span id="coisa-preferida-div"></span>
+    </p>
+
     <div id="result"></div>
 
     <script>
@@ -27,10 +43,14 @@
                 alert("null");  window.location = "./index.html"; 
             }else{ 
                 alert(id);
-                var { _id, email, password} = vai(id).then((data) => {
+                var go = vai(id).then((data) => {
                     console.log(data);
-                    document.getElementById("email").value = data.email;
-                    document.getElementById("senha").value = data.password;
+                    document.getElementById("name-div").textContent = data.name;
+                    document.getElementById("id-div").textContent = data._id;
+                    console.log(data.name);
+                    document.getElementById("email-div").textContent = data.email;
+                    document.getElementById("senha-div").textContent = data.password;
+                    document.getElementById("coisa-preferida-div").textContent = data.coisa_preferida;
                 });
             }
         });
@@ -50,7 +70,7 @@
 
                     const json = await response.json();
                     console.log(json);
-                    return await { _id: json._id, email: json.email, password: json.password };
+                    return await { _id: json._id, name: json.nome ,email: json.email, password: json.password, coisa_preferida: json.coisa_preferida};
                 } catch (error) {
                     console.error(error.message + "erro catch");
                 }
