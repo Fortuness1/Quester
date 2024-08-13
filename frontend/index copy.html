@@ -5,11 +5,7 @@
     <title>Exemplo de Posição no Array</title>
 </head>
 <body>
-    <div id="pai">
-        <div class="filho">Div 1</div>
-        <div class="filho">Div 2</div>
-        <div class="filho">Div 3</div>
-    </div>
+
 
     <form>
         <input type="text" name="email" id="email" placeholder="email">
@@ -71,7 +67,7 @@
                     const json = await response.json();
                     console.log(json);
                     return await { _id: json._id, name: json.nome ,email: json.email, password: json.password, coisa_preferida: json.coisa_preferida};
-                } catch (error) {
+                }catch (error) {
                     console.error(error.message + "erro catch");
                 }
             }
