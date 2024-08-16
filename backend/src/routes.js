@@ -1,6 +1,5 @@
 const { Router } = require('express');
-const controllers = require('./controllers/loginUser');
-
+const controllers = require('./controllers/UserController');
 const routes = new Router();
 
 routes.get('/', (req, res) => {
@@ -10,15 +9,8 @@ routes.get('/', (req, res) => {
     res.send(JSON.stringify(status));
 });
 
-routes.post('/signin', controllers.getUser);
+routes.post('/signup', controllers.createUser);
 
-routes.post('/signup', controllers.setUser);
-
-routes.delete('/deleteuser', controllers.deleteUser);
-
-routes.get('/alluser', controllers.AllUser);
-
-routes.get('/findbyid/:id', controllers.findUserById);
-
+routes.post('/login', controllers.findUser)
 
 module.exports = routes;
