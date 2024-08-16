@@ -11,7 +11,7 @@ const findUserSchema = new mongoose.Schema({
       required: true,
       minlength: 8,
     },
-},{collection: 'user'});
+}, {collection: 'users_quester'});
   
 const FindUserModel = mongoose.model("FindUser", findUserSchema);
 
