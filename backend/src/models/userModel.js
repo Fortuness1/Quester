@@ -5,21 +5,53 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    date_birth: {
+    last_name: {
       type: String,
-      required: true
+      required: true,
+    },
+    surname: {
+      type: String,
+      required: true,
+    },
+    occupation:{
+      type: String,
+      required: true,
     },
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
       required: true,
       minlength: 8,
     },
-  }, {collection: 'users_quester'});
+    profile_photo:{
+      type: String,
+      default: "default-profire-photo.png"
+    },
+    questions:[
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question"
+      }
+    ],
+    waiting_matches: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "WaitingMatch"
+      }
+    ],
+    created_matches: {
+      type: mongoose.Schema.Types.Mixed,
+      default: []
+    },
+    participated_matches: {
+      type: mongoose.Schema.Types.Mixed,
+      default: []
+    },
+  });
   
 const UserModel = mongoose.model("User", userSchema);
 

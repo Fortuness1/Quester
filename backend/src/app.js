@@ -1,13 +1,14 @@
 require('dotenv').config({ path: './backend/.env' });
 const express = require('express');
 const connectToDatabase = require('./config/db.js')
+connectToDatabase()
 
 const app = express();
 const routes = require('./routes.js');
 
-connectToDatabase()
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
