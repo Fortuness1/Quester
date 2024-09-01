@@ -38,6 +38,7 @@ routes.put('/match/finished', matchConController.finishedMatch);
 routes.get('/match/history/:id', matchConController.findMatchesHistory);
 routes.get('/match/:idMatch', matchConController.findMatch);
 routes.get('/match/enter/:pin', matchConController.enterMatch);
+routes.get('/match/rank/:id', matchConController.getRank);
 
 //Waiting Match
 routes.post('/waiting-match', waitingMatchController.createWaitingMatch);

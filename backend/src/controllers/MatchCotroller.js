@@ -183,3 +183,19 @@ exports.finishedMatch = async (req, res) => {
         return res.status(500).json({ error: err.message });
     }
 }
+
+exports.getRank = async (req, res) => {
+    try {
+        const idMatch = req.params.id;
+        const match = await MatchModel.findById(idMatch);
+        const players = match.players;
+
+        players.sort((a, b) => {
+            return a.rank_position - b.rank_position;
+        });
+
+        return res.status(200).json(players);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
