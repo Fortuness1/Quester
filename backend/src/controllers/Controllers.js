@@ -1,6 +1,6 @@
 const UserModel = require('../models/UserModel');
 const BankModel = require('../models/QuestionModel');
-const MatchesModel = require('../models/MatcheModel');
+const MatchModel = require('../models/MatchModel');
 const WaitingMatchModel = require('../models/WaitingMatch');
 
 const fs = require('fs/promises');
@@ -35,9 +35,24 @@ exports.getWaitingMatches = async (req, res) => {
 }
 
 
+exports.deleteAllMatches = async (req, res) => {
+    try {
+        const deleteAllMatches = await MatchModel.deleteMany({});
+        return res.status(200).json(deleteAllMatches);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
 
 
-
+exports.deleteWaitingMatche = async (req, res) => {
+    try {
+        const deleteAllMatches = await WaitingMatchModel.deleteMany({});
+        return res.status(200).json(deleteAllMatches);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
 
 
 exports.findbyID = async (req, res) => {
@@ -103,3 +118,17 @@ exports.deleteALL = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+exports.findAllMatches = async (req, res) => {
+    try {
+       const allMatch = await MatchModel.find({});
+       
+        return res.status(200).json(allMatch);
+    } catch (err) {
+        if(err.messageFormat === undefined) {
+            res.status(404).json({ error: "user not found" });
+        } else{
+            res.status(500).json({ error: err.message });
+        }
+    }
+}

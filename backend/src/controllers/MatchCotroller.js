@@ -1,28 +1,121 @@
 const UserModel = require('../models/UserModel');
-const MatcheModel = require('../models/MatcheModel');
+const MatchModel = require('../models/MatchModel');
+const QuestionModel = require('../models/QuestionModel');
 const WaitingMatchModel = require('../models/WaitingMatch');
 const dateTime = require('../utils/dateTime');
 const DMYdate = require('../utils/DMYdate');
 
-
-exports.enterMatch = async (req, res) => {
+exports.createMatch = async (req, res) => {
+    const data = new Date()
+    const dataTime = dateTime(data);
+    const DMYdata = DMYdate(data);
     try {
-        const match = await MatcheModel.findOne({ pin: req.params.pin });
-        res.status(200).json({ "status": "find match" });
+        const User = await UserModel.findById(req.body._id);
+        if(User === null) {
+            return res.status(404).json({ error: "user not found" });
+        }
+        const questionsaArray = [];
+
+        for(let i = 0; i < req.body.questions.length; i++) {
+            for(let j = 0; j < User.questions.length; j++) {
+                const questionFor = User.questions[j];
+                const idString = questionFor._id.toString();
+                if( req.body.questions[i] === idString ) {
+                    questionsaArray.push(User.questions[j]);
+                }
+            }
+        }
+        const match = await MatchModel(
+            {
+                name: req.body.name,
+                question_times: req.body.question_times,
+                chat_availability: req.body.chat_availability,
+                semester: req.body.semester,
+                data: DMYdata,
+                time: dataTime,
+                name_host: User.name + " " + User.surname,
+                questions: questionsaArray,
+                pin: Math.floor(Math.random() * 900000) + 100000
+            }
+        );
+        await match.save();
+
+        const matchUser = await UserModel.findByIdAndUpdate(
+            req.body._id, { $push: { created_matches: match }}, { new: true }
+        );
+     
+        return res.status(201).json(
+            { 
+                "status": "match created",
+                "id_match": match._id,
+            }
+        );	
     } catch (err) {
-        if (err.message === "Cannot read properties of null (reading 'matches_created')") {
-            console.log(err.message);
-            res.status(404).json({ error: 'not find match' })
-        } else{
-            res.status(500).json({ error: err.message });
+        console.error(err.message);
+        if(err.path === '_id') {
+            return res.status(404).json({ error: "user not found" });
+        } else {
+            return res.status(500).json({ error: err.message });
         }
     }
 };
 
+exports.enterMatch = async (req, res) => {
+    try {
+        const match = await MatchModel.findOne({ pin: req.params.pin });
+        if(match === null) {
+            return res.status(404).json({ error: "match not found" });
+        } else if(match.status === "WAITING") {
+            return res.status(200).json({ "status": "match found" });
+        } else{
+            return res.status(409).json({ error: "match found but in progress or finished" });
+        }
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
+exports.findMatch = async (req, res) => {
+    try {
+        const match = await MatchModel.findById(req.params.idMatch);
+
+        for(let i = 0; i < match.questions.length; i++) {
+            const question = await QuestionModel.findById(match.questions[i]);
+            match.questions[i] = question;
+        }
+
+        return res.status(200).json(match);
+    } catch (err) {
+        if(err.path === "_id") {
+            return res.status(404).json({ error: "match not found" });
+        } else {
+            return res.status(500).json({ error: err.message });
+        }
+    }
+}
+
 exports.findMatchesHistory = async (req, res) => {
     try {
+        let createdMatches = [];
+        let participatedMatches = [];
         const matchesHistory = await UserModel.findById(req.params.id).select('created_matches').select('participated_matches');
-        res.status(200).json({ "created_matches": matchesHistory.created_matches, "participated_matches": matchesHistory.participated_matches });
+        
+        for(let i = 0; i < matchesHistory.created_matches.length; i++) {
+            const match = await MatchModel.findById(matchesHistory.created_matches[i]);
+            createdMatches.push(match);
+        }
+
+        for(let i = 0; i < matchesHistory.participated_matches.length; i++) {
+            const match = await MatchModel.findById(matchesHistory.participated_matches[i]);
+            for(let j = 0; j < match.players.length; j++) {
+               if(match.players[j]._id === req.params.id) {
+                    match.players = match.players[j] 
+                    participatedMatches.push(match);
+                }
+            }
+        }
+
+        res.status(200).json({ "created_matches": createdMatches, "participated_matches": participatedMatches });
     } catch (err) {
         if(err.messageFormat === undefined) {
             res.status(404).json({ error: "user not found" });
@@ -32,42 +125,57 @@ exports.findMatchesHistory = async (req, res) => {
     }
 };
 
-exports.createMatch = async (req, res) => {
-    const data = new Date()
-    const dataTime = dateTime(data);
-    const DMYdata = DMYdate(data);
+exports.changeStatus = async (req, res) => {
     try {
-        const User = await UserModel.findById(req.body._id);
-        const nome = User.name;
-        const questions = [];
-        for(let i = 0; i < req.body.questions.length; i++) {
-            let teste = false
-            for(let j = 0; j < User.questions.length; j++) {
-                const questionFor = User.questions[j];
-                const idString = questionFor._id.toString();
-                if( req.body.questions[i] === idString ) {
-                    questions.push(User.questions[j]);
-                }
-            }
+        const changeStatus = await MatchModel.findByIdAndUpdate(
+            req.body._id_match, { status: req.body.status },
+        )
+        if(changeStatus === null) {
+            return res.status(404).json({ error: "match not found" });
         }
-        const matche = await MatcheModel(
-            {
-                name: req.body.name,
-                question_times: req.body.question_times,
-                data: DMYdata,
-                time: dataTime,
-                name_host: nome,
-                questions: questions,
-                pin: Math.floor(Math.random() * 900000) + 100000
-            }
-        );
-        const match = await UserModel.findByIdAndUpdate(
-            req.body._id, { $push: { created_matches: matche }}, { new: true }
-        );
-        res.status(201).json({ "status": "match created" });	
+        return res.status(200).json({ "status": "status changed" });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
     }
-};
+}
 
+exports.finishedMatch = async (req, res) => {
+    try {
+        const players = []
+        //Funciona
+        const match = await MatchModel.findByIdAndUpdate(
+            req.body._id_match, { 
+                status: "FINISHED",
+                players: req.body.players
+            }
+        )
 
+        for(let i = 0; i < match.questions.length; i++) {
+            const user = await QuestionModel.findByIdAndUpdate(
+                match.questions[i]._id,
+                 { 
+                    $set: { editable: false },
+                    $push: { used_matches : match.name } 
+                }
+            )
+        }
+
+        for(let i = 0; i < req.body.players.length; i++) {
+            const user = await UserModel.findByIdAndUpdate(
+                req.body.players[i]._id, { $push: { participated_matches: match }}
+            )
+            const player = {
+                _id: req.body.players[i],
+                name: user.name,
+                last_name: user.last_name,
+                profile_photo: user.profile_photo
+            }
+        };
+
+        
+
+        return res.status(200).json({ "status": "match finished" });
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}

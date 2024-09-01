@@ -12,6 +12,7 @@ exports.createQuestion = async (req, res) => {
         const idUSer = req.body._id;
 
         const iexists = await UserModel.findById(idUSer);
+        
         if (!iexists) {
             return res.status(404).json({ error: "user not found" });
         }

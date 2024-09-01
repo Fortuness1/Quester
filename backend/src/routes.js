@@ -19,7 +19,7 @@ routes.get('/', (req, res) => {
 routes.post('/signup', userController.createUser);
 routes.post('/login', userController.findUser);
 routes.post('/user', userController.getUser);
-routes.put('/update', userController.chargeUser);
+routes.put('/user', userController.chargeUser);
 routes.put('/change-profile-photo/:id', upload.single('profile-photo'), userController.changeProfilePhoto);
 routes.get('/profile-photo/:id', userController.profilePhoto);
 routes.delete('/user/:id', userController.deleteUser);
@@ -32,15 +32,19 @@ routes.post('/duplicate-question', questionController.duplicateQuestion);
 routes.delete('/question/:iduser/:idquestion', questionController.deleteQuestion);
 
 //Match
-routes.post('/create-match', matchConController.createMatch); //fazendo
-routes.get('/matches-history/:id', matchConController.findMatchesHistory); //feita
-routes.get('/enter-match/:pin', matchConController.enterMatch);
+routes.post('/match', matchConController.createMatch); // colocar se for partida guardada
+routes.put('/match/status', matchConController.changeStatus);
+routes.put('/match/finished', matchConController.finishedMatch);
+routes.get('/match/history/:id', matchConController.findMatchesHistory);
+routes.get('/match/:idMatch', matchConController.findMatch);
+routes.get('/match/enter/:pin', matchConController.enterMatch);
 
 //Waiting Match
 routes.post('/waiting-match', waitingMatchController.createWaitingMatch);
 routes.get('/waiting-match/:id', waitingMatchController.getWaitingMatch); //*
-routes.get('/waiting-matches/:id', waitingMatchController.getAllWaitingMatches);
-routes.put('/waiting-match/', waitingMatchController.updateWaitingMatch); 
+routes.get('/waiting-match/history/:id', waitingMatchController.getAllWaitingMatches);
+routes.post('/waiting-match/duplicate', waitingMatchController.duplicateWaitingMatch);
+routes.put('/waiting-match/update', waitingMatchController.updateWaitingMatch); 
 routes.delete('/waiting-match/:id/:idwaiting', waitingMatchController.deleteWaitingMatch);
 
 //Default
@@ -48,9 +52,12 @@ routes.get('/findbyID/:id', controllers.findbyID);
 routes.delete('/deletebyID/:id', controllers.deletebyID);
 routes.delete('/delete-all', controllers.deleteALL);
 routes.delete('/delete-all-questions', controllers.deleteAllQuestions);
+routes.delete('/delete-all-match', controllers.deleteAllMatches);
+routes.delete('/delete-all-waiting-match', controllers.deleteWaitingMatche);
 routes.get('/find-all', controllers.findAllUser);
 routes.get('/find-all-waiting-matches', controllers.getWaitingMatches);
 routes.get('/find-all-questions', controllers.findAllQuestions);
+routes.get('/find-all-matches', controllers.findAllMatches);
 routes.delete('/deletebyIDCreatedMatches/:iduser/:idmache', controllers.deleteCreatedMatches); //para fazer
 
 module.exports = routes;

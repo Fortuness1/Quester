@@ -14,8 +14,20 @@ const matchesSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    chat_availability: {
+        type: Boolean,
+        required: true,
+    },
+    semester: {
+        type: String,
+        required: true,
+    },
     name_host: {
         type: String,
+        required: true,
+    },
+    question_times: {
+        type: Number,
         required: true,
     },
     players: {
@@ -38,6 +50,6 @@ const matchesSchema = new mongoose.Schema({
     }
 });
 
-const MatchesModel = mongoose.model("Matche", matchesSchema);
+const MatchModel = mongoose.model("Match", matchesSchema);
 
-module.exports = MatchesModel;
+module.exports = MatchModel;

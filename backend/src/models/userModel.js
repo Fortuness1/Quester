@@ -43,14 +43,18 @@ const userSchema = new mongoose.Schema({
         ref: "WaitingMatch"
       }
     ],
-    created_matches: {
-      type: mongoose.Schema.Types.Mixed,
-      default: []
-    },
-    participated_matches: {
-      type: mongoose.Schema.Types.Mixed,
-      default: []
-    },
+    created_matches: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Match"
+      }
+    ],
+    participated_matches: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Match"
+      }
+    ],
   });
   
 const UserModel = mongoose.model("User", userSchema);

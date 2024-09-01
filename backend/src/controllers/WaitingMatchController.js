@@ -136,3 +136,42 @@ exports.updateWaitingMatch = async (req, res) => {
         }
     }
 }
+
+exports.duplicateWaitingMatch = async (req, res) => {
+    try {
+        const data = new Date()
+        const dataTime = dateTime(data);
+        const DMYdata = DMYdate(data);
+
+        const WaitingMatch = await WaitingMatchModel.findById(req.body._id_waiting_match);
+
+        console.log(WaitingMatch);
+        if(WaitingMatch === null) {
+            return res.status(404).json({ error: "waiting match not found" });
+        }
+
+        const WaitingMatchDuplicate = new WaitingMatchModel({
+            name: req.body.name,
+            semester: WaitingMatch.semester,
+            chat_availability: WaitingMatch.chat_availability,
+            data: DMYdata,
+            time: dataTime,
+            question_times: WaitingMatch.question_times,
+            questions: WaitingMatch.questions
+        });
+
+        const saveWaitingMatch = await WaitingMatchDuplicate.save();
+
+        const Usersave = await UserModel.findByIdAndUpdate(
+            req.params.id, { $push: { waiting_matches: WaitingMatchDuplicate }}
+        );
+        
+        return res.status(201).json({ "status": "waiting match duplicated" });
+    } catch (err) {
+        if(err.path == '_id'){
+            return res.status(404).json({ error: "user or waiting match not found" });
+        } else {
+            return res.status(500).json({ error: err.message });
+        }
+    }
+}
