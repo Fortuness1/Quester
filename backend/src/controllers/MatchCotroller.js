@@ -142,11 +142,29 @@ exports.changeStatus = async (req, res) => {
 exports.finishedMatch = async (req, res) => {
     try {
         const players = []
-        //Funciona
+        let player = {}
+
+        for(let i = 0; i < req.body.players.length; i++) {
+            const user = await UserModel.findByIdAndUpdate(
+                req.body.players[i]._id, { $push: { participated_matches: req.body._id_match }}
+            )
+            player = {
+                _id: req.body.players[i]._id,
+                name: user.name,
+                last_name: user.last_name,
+                rank_position: req.body.players[i].rank_position,
+                score: req.body.players[i].score,
+                profile_photo: user.profile_photo,
+                answers: req.body.players[i].answers
+            }
+            players.push(player);
+        };
+
         const match = await MatchModel.findByIdAndUpdate(
-            req.body._id_match, { 
+            req.body._id_match,
+            { 
                 status: "FINISHED",
-                players: req.body.players
+                players: players
             }
         )
 
@@ -159,20 +177,6 @@ exports.finishedMatch = async (req, res) => {
                 }
             )
         }
-
-        for(let i = 0; i < req.body.players.length; i++) {
-            const user = await UserModel.findByIdAndUpdate(
-                req.body.players[i]._id, { $push: { participated_matches: match }}
-            )
-            const player = {
-                _id: req.body.players[i],
-                name: user.name,
-                last_name: user.last_name,
-                profile_photo: user.profile_photo
-            }
-        };
-
-        
 
         return res.status(200).json({ "status": "match finished" });
     } catch (err) {
