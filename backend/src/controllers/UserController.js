@@ -51,7 +51,7 @@ exports.findUser = async (req, res) => {
 exports.getUser = async (req, res) => {
     try {
         const user = await UserModel.findById(req.body._id);
-        res.status(200).json({name: user.name, surname: user.surname, email: user.email, password: user.password});
+        res.status(200).json({name: user.name, last_name: user.last_name ,surname: user.surname, email: user.email, password: user.password});
     } catch (err) {
         if(err.kind == "ObjectId"){
             res.status(400).json({ error: "user not found" })
