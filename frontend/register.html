@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../pages/assets/css/register.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="big-container">
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <a href="#"
+                ><img src="../pages/assets/img/blackLogo.svg" alt=""
+              /></a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="../pages/assets/img/interrogacao.svg" alt=""
+              /></a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <div class="container-mascot container-settings">
+          <div class="image-mascot"></div>
+          <div class="points">
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+          </div>
+        </div>
+        <div class="login-container container-settings">
+          <div class="login-box">
+            <form action="/singup" method="post">
+              <h2>Cadastro</h2>
+
+              <div class="input-box">
+                <input
+                  type="text"
+                  id="nome"
+                  class="nome"
+                  name="nome"
+                  placeholder="Nome"
+                  required
+                />
+                <i class="material-icons">person</i>
+                <div id="nome-error" class="mensagem-erro"></div>
+                <!-- Mensagem de erro para Nome -->
+              </div>
+
+              <div class="input-box">
+                <input
+                  type="text"
+                  id="sobrenome"
+                  class="sobrenome"
+                  name="sobrenome"
+                  placeholder="Sobrenome"
+                  required
+                />
+                <i class="material-icons">person</i>
+                <div id="sobrenome-error" class="mensagem-erro"></div>
+                <!-- Mensagem de erro para Sobrenome -->
+              </div>
+
+              <div class="input-box">
+                <input
+                  type="text"
+                  id="user"
+                  class="user"
+                  name="user"
+                  placeholder="User"
+                  required
+                />
+                <i class="material-icons">mood</i>
+                <div id="user-error" class="mensagem-erro"></div>
+                <!-- Mensagem de erro para Usuário -->
+              </div>
+
+              <div class="input-box">
+                <input
+                  type="text"
+                  id="email"
+                  class="email"
+                  name="email"
+                  placeholder="E-mail"
+                  required
+                />
+                <i class="material-icons">mail</i>
+                <div id="email-error" class="mensagem-erro"></div>
+                <!-- Mensagem de erro para E-mail -->
+              </div>
+
+              <div class="input-box">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Senha"
+                  required
+                />
+                <i class="material-icons">lock</i>
+                <div id="password-error" class="mensagem-erro"></div>
+                <!-- Mensagem de erro para Senha -->
+              </div>
+
+              <button type="submit">Entrar</button>
+            </form>
+            <div class="login-link">
+              <p>Já está cadastrado? <a href="#">Faça seu log-in</a></p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+          let isValid = true;
+
+          // Nome
+          const nomeInput = document.getElementById("nome");
+          const nomeError = document.getElementById("nome-error");
+          if (nomeInput.value.length < 2) {
+            nomeError.textContent = "Nome deve ter pelo menos 2 caracteres.";
+            isValid = false;
+          } else {
+            nomeError.textContent = "";
+          }
+
+          // Sobrenome
+          const sobrenomeInput = document.getElementById("sobrenome");
+          const sobrenomeError = document.getElementById("sobrenome-error");
+          if (sobrenomeInput.value.length < 2) {
+            sobrenomeError.textContent =
+              "Sobrenome deve ter pelo menos 2 caracteres.";
+            isValid = false;
+          } else {
+            sobrenomeError.textContent = "";
+          }
+
+          // Usuário
+          const userInput = document.getElementById("user");
+          const userError = document.getElementById("user-error");
+          if (userInput.value.length < 2) {
+            userError.textContent = "Usuário deve ter pelo menos 2 caracteres.";
+            isValid = false;
+          } else {
+            userError.textContent = "";
+          }
+
+          // E-mail
+          const emailInput = document.getElementById("email");
+          const emailError = document.getElementById("email-error");
+          const emailPattern =
+            /^[a-zA-Z0-9._%+-]+@(alu\.ufc\.br|virtual\.ufc\.br)$/;
+          if (!emailPattern.test(emailInput.value)) {
+            emailError.textContent =
+              'Por favor, insira um e-mail válido com domínio "alu.ufc.br" ou "virtual.ufc.br".';
+            isValid = false;
+          } else {
+            emailError.textContent = "";
+          }
+
+          // Senha
+          const passwordInput = document.getElementById("password");
+          const passwordError = document.getElementById("password-error");
+          if (passwordInput.value.length < 8) {
+            passwordError.textContent =
+              "Senha deve ter pelo menos 8 caracteres.";
+            isValid = false;
+          } else {
+            passwordError.textContent = "";
+          }
+
+          if (!isValid) {
+            event.preventDefault(); // Evita o envio do formulário se houver erros
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
