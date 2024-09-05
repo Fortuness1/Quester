@@ -22,7 +22,7 @@ exports.createUser = async (req, res) => {
         
         await newUser.save();     
         console.log(newUser._id);   
-        res.status(201).json({ _id: newUser._id })
+        res.status(201).json({ _id: newUser._id, occupation:  newUser.occupation });
     } catch (err) {
         if (err.code === 11000 && err.keyPattern.email === 1) {
             res.status(409).json({ error: 'email already registered' });
@@ -42,7 +42,7 @@ exports.findUser = async (req, res) => {
         if (user == null) {
             return res.status(401).json({ error: 'Incorrect email or password' });
         }
-        res.status(200).json({_id: user._id});
+        res.status(200).json({_id: user._id, occupation: user.occupation});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
