@@ -20,15 +20,15 @@ exports.createUser = async (req, res) => {
             occupation: occupation
         });
         
-        console.log(newUser._id);
-        await newUser.save();        
+        await newUser.save();     
+        console.log(newUser._id);   
         res.status(201).json({ _id: newUser._id })
     } catch (err) {
-        console.log(err);
-        if (err.code === 11000) {
+        if (err.code === 11000 && err.keyPattern.email === 1) {
             res.status(409).json({ error: 'email already registered' });
-        }else {
-            console.log(err);
+        } else if(err.code === 11000 && err.keyPattern.surname === 1){
+            res.status(409).json({ error: 'surname already registered' });
+        } else {
             res.status(500).json({ error: err.message });
         }
     }
@@ -39,9 +39,8 @@ exports.findUser = async (req, res) => {
         const email = req.body.email
         const password = req.body.password
         const user = await UserModel.findOne({  email: email, password: password, });
-        console.log(user);
         if (user == null) {
-            return res.status(422).json({ error: 'Incorrect email or password' });
+            return res.status(401).json({ error: 'Incorrect email or password' });
         }
         res.status(200).json({_id: user._id});
     } catch (err) {
