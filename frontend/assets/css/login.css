@@ -101,7 +101,7 @@ main {
 
 .login-box {
   width: 30vw;
-  padding: 40px;
+  padding: 58px 40px 40px 40px;
   border-radius: 5px;
   align-items: start;
 }
@@ -205,4 +205,12 @@ button[type="submit"]:hover {
 
 .fade-in.active {
   opacity: 1;
+}
+
+.mensagem-erro{
+  color: red;
+  font-size: 15px;
+  padding: 0px 0px 10px 0px;
+  margin: -10px 0 0 30px;
+  text-align: start;
 }

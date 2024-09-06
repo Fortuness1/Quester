@@ -53,12 +53,13 @@ header ul {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-ul {
   list-style: none;
   display: flex;
   gap: 1vw;
+}
+
+header ul li{
+  cursor: pointer;
 }
 
 main {

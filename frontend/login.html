@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../pages/assets/css/login.css" />
-    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../public/css/login.css" />
+    <title>Login</title>
   </head>
   <body>
     <div class="main-container">
@@ -13,11 +16,11 @@
         <nav>
           <ul>
             <li>
-              <a href="#"><img src="../pages/assets/img/blackLogo.svg" alt="" /></a>
+              <a href="#"><img src="../public/img/blackLogo.svg" alt="" /></a>
             </li>
             <li>
               <a href="#">
-                <img src="../pages/assets/img/interrogacao.svg" alt="" />
+                <img src="../public/img/interrogacao.svg" alt="" />
               </a>
             </li>
           </ul>
@@ -34,7 +37,7 @@
         </div>
         <div class="login-container container-settings">
           <div class="login-box">
-            <form onsubmit="loginRedirect(event)">
+            <form id="loginForm">
               <h2>Login</h2>
               <div class="input-box">
                 <input
@@ -46,7 +49,7 @@
                   required
                 />
                 <i class="material-icons">mail</i>
-              </div>            
+              </div>
 
               <div class="input-box">
                 <input
@@ -57,14 +60,14 @@
                   required
                 />
                 <i class="material-icons">lock</i>
-                <div id="email-error" class="error-message"></div>
               </div>
+              <div id="login-error" class="mensagem-erro"></div>
 
               <button type="submit">Entrar</button>
             </form>
 
             <div class="register-link">
-              <p>Não tem conta? <a href="#">Cadastre-se</a></p>
+              <p>Não tem conta? <a href="register.html">Cadastre-se</a></p>
             </div>
           </div>
         </div>
@@ -72,19 +75,51 @@
     </div>
 
     <script>
-      // Animação de fade-in ao carregar a página
-      document.addEventListener('DOMContentLoaded', () => {
-        document.body.classList.add('active');
-      });
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
 
-      // Função para redirecionamento suave
-      function loginRedirect(event) {
-        event.preventDefault(); // Evita o envio do formulário
-        document.body.classList.add('fade'); // Aplica a animação de fade-out
-        setTimeout(() => {
-          window.location.href = '../alunoHomePage/index.html'; // Redireciona para a página desejada
-        }, 500); // Tempo de espera deve coincidir com o tempo de transição no CSS
-      }
+          const emailInput = document.getElementById("email");
+          const passwordInput = document.getElementById("password");
+          const errorDiv = document.getElementById("login-error");
+
+          const email = emailInput.value;
+          const password = passwordInput.value;
+
+          try {
+            const response = await fetch("http://localhost:3000/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              document.body.classList.add("fade"); 
+              setTimeout(() => {
+                if (email.endsWith("@virtual.ufc.br")) {
+                  window.location.href = "profHome.html"; 
+                } else if (email.endsWith("@alu.ufc.br")) {
+                  window.location.href = "alunoHome.html";
+                } else {
+                  errorDiv.textContent = "E-mail inválido.";
+                  errorDiv.style.color = "red";
+                }
+              }, 500);
+            } else {
+              errorDiv.textContent = "E-mail ou senha incorretos.";
+              errorDiv.style.color = "red";
+            }
+          } catch (error) {
+            console.error("Erro na requisição:", error);
+            errorDiv.textContent = "Erro na requisição.";
+            errorDiv.style.color = "red";
+          }
+        });
     </script>
   </body>
 </html>

@@ -32,7 +32,7 @@ routes.post('/duplicate-question', questionController.duplicateQuestion);
 routes.delete('/question/:iduser/:idquestion', questionController.deleteQuestion);
 
 //Match
-routes.post('/match', matchConController.createMatch); // colocar se for partida guardada
+routes.post('/match', matchConController.createMatch);
 routes.put('/match/status', matchConController.changeStatus);
 routes.put('/match/finished', matchConController.finishedMatch);
 routes.get('/match/history/:id', matchConController.findMatchesHistory);
@@ -42,7 +42,7 @@ routes.get('/match/rank/:id', matchConController.getRank);
 
 //Waiting Match
 routes.post('/waiting-match', waitingMatchController.createWaitingMatch);
-routes.get('/waiting-match/:id', waitingMatchController.getWaitingMatch); //*
+routes.get('/waiting-match/:id', waitingMatchController.getWaitingMatch);
 routes.get('/waiting-match/history/:id', waitingMatchController.getAllWaitingMatches);
 routes.post('/waiting-match/duplicate', waitingMatchController.duplicateWaitingMatch);
 routes.put('/waiting-match/update', waitingMatchController.updateWaitingMatch); 
@@ -59,6 +59,6 @@ routes.get('/find-all', controllers.findAllUser);
 routes.get('/find-all-waiting-matches', controllers.getWaitingMatches);
 routes.get('/find-all-questions', controllers.findAllQuestions);
 routes.get('/find-all-matches', controllers.findAllMatches);
-routes.delete('/deletebyIDCreatedMatches/:iduser/:idmache', controllers.deleteCreatedMatches); //para fazer
+routes.delete('/deletebyIDCreatedMatches/:iduser/:idmache', controllers.deleteCreatedMatches);
 
 module.exports = routes;

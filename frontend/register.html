@@ -7,8 +7,8 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../pages/assets/css/register.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="../public/css/register.css" />
+    <title>Registro</title>
   </head>
   <body>
     <div class="big-container">
@@ -16,13 +16,11 @@
         <nav>
           <ul>
             <li>
-              <a href="#"
-                ><img src="../pages/assets/img/blackLogo.svg" alt=""
-              /></a>
+              <a href="#"><img src="../public/img/blackLogo.svg" alt="" /></a>
             </li>
             <li>
               <a href="#">
-                <img src="../pages/assets/img/interrogacao.svg" alt=""
+                <img src="../public/img/interrogacao.svg" alt=""
               /></a>
             </li>
           </ul>
@@ -39,7 +37,7 @@
         </div>
         <div class="login-container container-settings">
           <div class="login-box">
-            <form action="/singup" method="post">
+            <form id="registerForm">
               <h2>Cadastro</h2>
 
               <div class="input-box">
@@ -47,46 +45,43 @@
                   type="text"
                   id="nome"
                   class="nome"
-                  name="nome"
+                  name="name"
                   placeholder="Nome"
                   required
                 />
                 <i class="material-icons">person</i>
-                <div id="nome-error" class="mensagem-erro"></div>
-                <!-- Mensagem de erro para Nome -->
               </div>
+              <div id="nome-error" class="mensagem-erro"></div>
 
               <div class="input-box">
                 <input
                   type="text"
                   id="sobrenome"
                   class="sobrenome"
-                  name="sobrenome"
+                  name="last_name"
                   placeholder="Sobrenome"
                   required
                 />
                 <i class="material-icons">person</i>
-                <div id="sobrenome-error" class="mensagem-erro"></div>
-                <!-- Mensagem de erro para Sobrenome -->
               </div>
+              <div id="sobrenome-error" class="mensagem-erro"></div>
 
               <div class="input-box">
                 <input
                   type="text"
                   id="user"
                   class="user"
-                  name="user"
-                  placeholder="User"
+                  name="surname"
+                  placeholder="Usuário"
                   required
                 />
                 <i class="material-icons">mood</i>
-                <div id="user-error" class="mensagem-erro"></div>
-                <!-- Mensagem de erro para Usuário -->
               </div>
+              <div id="user-error" class="mensagem-erro"></div>
 
               <div class="input-box">
                 <input
-                  type="text"
+                  type="email"
                   id="email"
                   class="email"
                   name="email"
@@ -94,9 +89,8 @@
                   required
                 />
                 <i class="material-icons">mail</i>
-                <div id="email-error" class="mensagem-erro"></div>
-                <!-- Mensagem de erro para E-mail -->
               </div>
+              <div id="email-error" class="mensagem-erro"></div>
 
               <div class="input-box">
                 <input
@@ -107,14 +101,16 @@
                   required
                 />
                 <i class="material-icons">lock</i>
-                <div id="password-error" class="mensagem-erro"></div>
-                <!-- Mensagem de erro para Senha -->
               </div>
+              <div id="password-error" class="mensagem-erro"></div>
 
-              <button type="submit">Entrar</button>
+              <button type="submit">Registrar</button>
             </form>
+            <div id="message" class="login-link"></div>
             <div class="login-link">
-              <p>Já está cadastrado? <a href="#">Faça seu log-in</a></p>
+              <p>
+                Já está cadastrado? <a href="login.html">Faça seu log-in</a>
+              </p>
             </div>
           </div>
         </div>
@@ -122,16 +118,23 @@
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const form = document.querySelector("form");
+        const form = document.getElementById("registerForm");
 
-        form.addEventListener("submit", function (event) {
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
           let isValid = true;
 
           // Nome
           const nomeInput = document.getElementById("nome");
           const nomeError = document.getElementById("nome-error");
-          if (nomeInput.value.length < 2) {
-            nomeError.textContent = "Nome deve ter pelo menos 2 caracteres.";
+          const nomePattern = /^[a-zA-Z\s]+$/;
+          if (
+            nomeInput.value.length < 2 ||
+            !nomePattern.test(nomeInput.value)
+          ) {
+            nomeError.textContent =
+              "Nome deve ter pelo menos 2 caracteres e conter apenas letras.";
             isValid = false;
           } else {
             nomeError.textContent = "";
@@ -140,9 +143,13 @@
           // Sobrenome
           const sobrenomeInput = document.getElementById("sobrenome");
           const sobrenomeError = document.getElementById("sobrenome-error");
-          if (sobrenomeInput.value.length < 2) {
+          const sobrenomePattern = /^[a-zA-Z\s]+$/;
+          if (
+            sobrenomeInput.value.length < 2 ||
+            !sobrenomePattern.test(sobrenomeInput.value)
+          ) {
             sobrenomeError.textContent =
-              "Sobrenome deve ter pelo menos 2 caracteres.";
+              "Sobrenome deve ter pelo menos 2 caracteres e conter apenas letras.";
             isValid = false;
           } else {
             sobrenomeError.textContent = "";
@@ -183,7 +190,47 @@
           }
 
           if (!isValid) {
-            event.preventDefault(); // Evita o envio do formulário se houver erros
+            return;
+          }
+
+          const userData = {
+            name: nomeInput.value,
+            last_name: sobrenomeInput.value,
+            surname: userInput.value,
+            email: emailInput.value,
+            password: passwordInput.value,
+          };
+
+          try {
+            const response = await fetch("http://localhost:3000/signup", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            });
+
+            const data = await response.json();
+
+            const messageDiv = document.getElementById("message");
+            if (response.ok) {
+              if (userData.email.endsWith("@virtual.ufc.br")) {
+                window.location.href = "profHome.html";
+              } else if (userData.email.endsWith("@alu.ufc.br")) {
+                window.location.href = "alunoHome.html";
+              }
+            } else if (response.status === 409) {
+              messageDiv.textContent = "Email já registrado.";
+              messageDiv.style.color = "red";
+            } else {
+              messageDiv.textContent = "Erro: " + data.error;
+              messageDiv.style.color = "red";
+            }
+          } catch (error) {
+            console.error("Erro na requisição:", error);
+            const messageDiv = document.getElementById("message");
+            messageDiv.textContent = "Erro na requisição.";
+            messageDiv.style.color = "red";
           }
         });
       });
