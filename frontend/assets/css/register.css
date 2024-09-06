@@ -8,7 +8,11 @@
 
 html,
 body {
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: white;
   font-family: "Sora", sans-serif;
 }
@@ -16,9 +20,12 @@ body {
 .big-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding: 3vw;
+  width: 90vw;
+  height: 90vh;
+  background-color: #f0f0f0;
   border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .container-settings {
@@ -29,17 +36,22 @@ body {
 }
 
 header {
-  background: linear-gradient(to bottom, #a0a0a0, #d0d0d0);
-  padding: 2vh;
-  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 20vw;
+  padding: 10px 20px;
+  background: linear-gradient(to bottom, #6b6b6b, #d0d0d0);
 }
 
 nav ul {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 6vw;
+  width: 78vw;
   list-style: none;
-  max-width: 90vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 main {
@@ -175,6 +187,7 @@ button[type="submit"]:hover {
 .mensagem-erro {
   color: red;
   font-size: 15px;
-  margin: 5px 0 0 30px;
+  padding: 0px 0px 10px 0px;
+  margin: -10px 0 0 30px;
   text-align: start;
 }
