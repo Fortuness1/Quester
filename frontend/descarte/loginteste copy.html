@@ -24,7 +24,9 @@
         const login = fetchLogin(email, senha).then( response => {
             if (response.ok) {
                 const data = response.json().then(data => {
+
                     sessionStorage.setItem("quester_idUser", data._id);
+                    
                     window.location = "./teste2.html";
                 });
             } else if (response.status === 401) {

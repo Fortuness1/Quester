@@ -22,14 +22,14 @@ exports.createUser = async (req, res) => {
         
         await newUser.save();     
         console.log(newUser._id);   
-        res.status(201).json({ _id: newUser._id, occupation:  newUser.occupation });
+        return res.status(201).json({ _id: newUser._id, occupation:  newUser.occupation });
     } catch (err) {
         if (err.code === 11000 && err.keyPattern.email === 1) {
-            res.status(409).json({ error: 'email already registered' });
+            return res.status(409).json({ error: 'email already registered' });
         } else if(err.code === 11000 && err.keyPattern.surname === 1){
-            res.status(409).json({ error: 'surname already registered' });
+            return res.status(409).json({ error: 'surname already registered' });
         } else {
-            res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err.message });
         }
     }
 };
@@ -42,28 +42,45 @@ exports.findUser = async (req, res) => {
         if (user == null) {
             return res.status(401).json({ error: 'Incorrect email or password' });
         }
-        res.status(200).json({_id: user._id, occupation: user.occupation});
+        return res.status(200).json({_id: user._id, occupation: user.occupation});
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
     }
 };
 
 exports.getUser = async (req, res) => {
     try {
         const user = await UserModel.findById(req.body._id);
-        res.status(200).json({name: user.name, last_name: user.last_name ,surname: user.surname, email: user.email, password: user.password});
+        return res.status(200).json({name: user.name, last_name: user.last_name ,surname: user.surname, email: user.email, password: user.password});
     } catch (err) {
         if(err.kind == "ObjectId"){
-            res.status(400).json({ error: "user not found" })
+            return res.status(400).json({ error: "user not found" })
         } else {
-            res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err.message });
         }
     }
 };
 
 exports.chargeUser = async (req, res) => {
     try {
-        await UserModel.findByIdAndUpdate(req.body._id, 
+         
+        const findUser = await UserModel.find({
+            $or: [{ email: req.body.email }, { surname: req.body.surname }],
+        });
+
+        if(findUser != null){
+            for (let i = 0; i < findUser.length; i++) {
+                if(findUser[i]._id != req.body._id){
+                    if(findUser[i].email === req.body.email){
+                        return res.status(409).json({ error: 'email already registered' });
+                    } else {
+                        return res.status(409).json({ error: 'surname already registered' });
+                    }
+                }
+            }
+        }
+
+        const chargeUser =  await UserModel.findByIdAndUpdate(req.body._id, 
             { 
                 $set: { 
                     name: req.body.name,
@@ -74,12 +91,13 @@ exports.chargeUser = async (req, res) => {
                 }
             }
         );
-        res.status(200).json({ status: "user updated" });
+
+        return res.status(200).json({ status: "user updated" });
     }catch (err) {
         if(err.kind == "ObjectId"){
-            res.status(404).json({ error: "user not found" });
+            return res.status(404).json({ error: "user not found" });
         } else {
-            res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err.message });
         }
     }
 }
@@ -90,18 +108,20 @@ exports.changeProfilePhoto = async (req, res) => {
         const questionBank = await UserModel.findById(req.params.id).select('profile_photo');
 
         if (questionBank.profile_photo == pathFile){
-            res.status(409).json({ error: "photo already exists" });
-        } else {
-            await UserModel.findByIdAndUpdate(
-                req.params.id, { $set: { profile_photo: pathFile } },
-            );
-            res.status(200).json({ status: "photo saved" });
+            return res.status(409).json({ error: "photo already exists" });
         }
+
+        await UserModel.findByIdAndUpdate(
+            req.params.id, { $set: { profile_photo: pathFile } },
+        );
+
+        return res.status(200).json({ status: "photo saved" });
+
     } catch (err) {
         if(err.kind == "ObjectId"){
-            res.status(400).json({ error: "user not found" });
+            return res.status(400).json({ error: "user not found" });
         } else{
-            res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err.message });
         }
     }
 }
@@ -109,12 +129,12 @@ exports.changeProfilePhoto = async (req, res) => {
 exports.profilePhoto = async (req, res) => {
     try {
         const questionBank = await UserModel.findById(req.params.id).select('profile_photo');
-        res.sendFile(path.join(__dirname, '../uploads/'+ questionBank.profile_photo));
+        return res.sendFile(path.join(__dirname, '../uploads/'+ questionBank.profile_photo));
     } catch (err) {
         if(err.kind == "ObjectId"){
-            res.status(400).json({ error: "user not found" });
+            return res.status(400).json({ error: "user not found" });
         } else {
-            res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err.message });
         }
     }
 }
