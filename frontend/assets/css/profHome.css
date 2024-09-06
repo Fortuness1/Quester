@@ -5,7 +5,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 body {
@@ -44,12 +43,12 @@ header ul {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-ul {
   list-style: none;
   display: flex;
   gap: 1vw;
+}
+header ul li {
+  cursor: pointer;
 }
 
 main {
@@ -109,4 +108,9 @@ main {
   color: white;
   cursor: pointer;
   margin: 10px;
+  transition: background-color 0.3s;
+}
+
+.button-menu h3:hover{
+background-color: #454545;
 }
