@@ -66,7 +66,7 @@ exports.enterMatch = async (req, res) => {
         if(match === null) {
             return res.status(404).json({ error: "match not found" });
         } else if(match.status === "WAITING") {
-            return res.status(200).json({ "status": "match found" });
+            return res.status(200).json({ "status": "match found", "id_match": match._id });
         } else{
             return res.status(409).json({ error: "match found but in progress or finished" });
         }
