@@ -12,8 +12,16 @@ exports.createWaitingMatch = async (req, res) => {
 
         const User = await UserModel.findById(req.body._id);
 
+        for(let i = 0; i <  req.body.questions.length; i++) {
+            const question = await QuestionModel.findById(req.body.questions[i]);
+            if(question === null) {
+                return res.status(404).json({ error: "question not found" });
+            }
+        }
+
         const WaitingMatch = new WaitingMatchModel({
             name: req.body.name,
+            description: req.body.description,
             semester: req.body.semester,
             chat_availability: req.body.chat_availability,
             data: DMYdata,
@@ -30,8 +38,9 @@ exports.createWaitingMatch = async (req, res) => {
         
         return res.status(201).json({ "status": "waiting match created" });
     } catch (err) {
+        console.log(err);
         if(err.path == '_id'){
-            return res.status(404).json({ error: "user not found" });
+            return res.status(404).json({ error: "user or questions not found" });
         } else {
             return res.status(500).json({ error: err.message });
         }
@@ -42,12 +51,19 @@ exports.getWaitingMatch = async (req, res) => {
     try {
         const questions = [];
         const WaitingMatch = await WaitingMatchModel.findById(req.params.id);
+
         for(let i = 0; i < WaitingMatch.questions.length; i++) {
             const question = await QuestionModel.findById(WaitingMatch.questions[i]);
+            if(question === null) {
+                return res.status(404).json({ error: "question not found" });
+            }
             questions.push(question);
         }
+
         const WaitingMatchTem = new WaitingMatchModel(WaitingMatch).toObject();
+
         WaitingMatchTem.questions = questions;
+        
         return res.status(200).json(WaitingMatchTem);
     } catch (err) {
         if(err.path == '_id'){
@@ -80,7 +96,6 @@ exports.getAllWaitingMatches = async (req, res) => {
 
 exports.deleteWaitingMatch = async (req, res) => {
     try {
-
         const user = await UserModel.findById(req.params.id);
 
         const waitingMatch = await WaitingMatchModel.findById(req.params.idwaiting);
@@ -94,7 +109,6 @@ exports.deleteWaitingMatch = async (req, res) => {
             { $pull: { waiting_matches: req.params.idwaiting } },
         );
 
-        console.log(removeWaitingMatch);
         const deleteWaitingMatch = await WaitingMatchModel.findByIdAndDelete(req.params.idwaiting);
 
         return res.status(200).json({ status: "waiting match deleted" });
@@ -117,6 +131,7 @@ exports.updateWaitingMatch = async (req, res) => {
             req.body._id,
             {   $set: {
                     name: req.body.name,
+                    description: req.body.description,
                     semester: req.body.semester,
                     chat_availability: req.body.chat_availability,
                     data: DMYdata,
@@ -145,13 +160,13 @@ exports.duplicateWaitingMatch = async (req, res) => {
 
         const WaitingMatch = await WaitingMatchModel.findById(req.body._id_waiting_match);
 
-        console.log(WaitingMatch);
         if(WaitingMatch === null) {
             return res.status(404).json({ error: "waiting match not found" });
         }
 
         const WaitingMatchDuplicate = new WaitingMatchModel({
             name: req.body.name,
+            description: WaitingMatch.description,
             semester: WaitingMatch.semester,
             chat_availability: WaitingMatch.chat_availability,
             data: DMYdata,

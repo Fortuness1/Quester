@@ -28,6 +28,7 @@ exports.createMatch = async (req, res) => {
         const match = await MatchModel(
             {
                 name: req.body.name,
+                description: req.body.description,
                 question_times: req.body.question_times,
                 chat_availability: req.body.chat_availability,
                 semester: req.body.semester,
@@ -43,6 +44,10 @@ exports.createMatch = async (req, res) => {
         const matchUser = await UserModel.findByIdAndUpdate(
             req.body._id, { $push: { created_matches: match }}, { new: true }
         );
+
+        if(req.body._id_waiting_match) {
+            const deleteWaitingMatch = await WaitingMatchModel.findByIdAndDelete(req.body._id_waiting_match);
+        }
      
         return res.status(201).json(
             { 
@@ -63,13 +68,15 @@ exports.createMatch = async (req, res) => {
 exports.enterMatch = async (req, res) => {
     try {
         const match = await MatchModel.findOne({ pin: req.params.pin });
+
         if(match === null) {
             return res.status(404).json({ error: "match not found" });
         } else if(match.status === "WAITING") {
             return res.status(200).json({ "status": "match found", "id_match": match._id });
-        } else{
-            return res.status(409).json({ error: "match found but in progress or finished" });
-        }
+        } 
+
+        return res.status(409).json({ error: "match found but in progress or finished" });
+
     } catch (err) {
         return res.status(500).json({ error: err.message });
     }

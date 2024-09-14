@@ -6,6 +6,10 @@ const matchesSchema = new mongoose.Schema({
         required: true,
         lowercase: true,
     },
+    description: {
+        type: String,
+        required: true,
+    },
     data: {
         type: String,
         required: true,

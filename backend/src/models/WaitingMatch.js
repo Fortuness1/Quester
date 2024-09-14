@@ -1,15 +1,19 @@
 const mongoose = require("mongoose");
 
 const WaitingMatchSchema = new mongoose.Schema({
-    "name": {
+    name: {
         type:String,
         required: true
     },
-    "semester": {
+    description: {
         type:String,
         required: true
     },
-    "data": {
+    semester: {
+        type:String,
+        required: true
+    },
+    data: {
         type:String,
         required: true
     },
@@ -17,23 +21,22 @@ const WaitingMatchSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    "time": {
+    time: {
         type:String,
         required: true
     },
-    "question_times": {
+    question_times: {
         type: Number,
         required: true
     },
-    "questions":[
+    questions:[
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Question"
         }
     ],			
 });
-
   
-const UserModel = mongoose.model("WaitingMatch", WaitingMatchSchema);
+const WaitingMatchModel = mongoose.model("WaitingMatch", WaitingMatchSchema);
 
-module.exports = UserModel;
+module.exports = WaitingMatchModel;
