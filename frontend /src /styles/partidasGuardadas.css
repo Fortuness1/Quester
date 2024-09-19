@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
+
+/* Reset e configurações iniciais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Sora", sans-serif;
+  background: #d0d0d0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  min-width: 320px; /* Garantir mínimo para dispositivos móveis */
+  overflow: hidden;
+}
+
+.container-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 5vw; /* Largura flexível */
+  min-width: 50px;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vh 0;
+  transition: width 0.3s ease;
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-item {
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.5s;
+  cursor: pointer;
+  position: relative;
+}
+
+.menu:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
+
+.menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background-color: transparent;
+  transition: background-color 0.3s, top 0.3s;
+}
+
+.menu:hover::before {
+  background-color: #00bfa6;
+}
+
+.user-option {
+  width: 100%;
+  padding: 0 1em;
+  margin: 1em auto;
+  cursor: pointer;
+}
+
+main {
+  padding: 2vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  margin-left: 6vw; /* Espaço flexível baseado no tamanho da sidebar */
+  transition: margin-left 0.3s ease;
+}
+
+.titulo-partidas-guardadas {
+  width: 100%;
+  padding: 0 10.5vw;
+  margin: 20px 0;
+  text-align: start;
+}
+
+.top-bar {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.selects {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.ordenar {
+  display: flex;
+}
+
+.top-bar select {
+  width: 20%;
+  padding: 0 10px;
+  height: 52px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 20px;
+  color: #333;
+  outline: none;
+  font-weight: 500;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.top-bar input {
+  width: 50%;
+  padding: 15px 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 20px;
+  color: #333;
+  outline: none;
+  font-weight: 500;
+  font-family: "Montserrat";
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.partidas-guardadas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dois cards por linha */
+  gap: 20px; /* Espaço entre os cards */
+  width: 80%;
+  padding: 20px;
+  justify-items: center;
+}
+.card-partida-guardada {
+  width: 100%;
+}
+.conteudo-card {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 10px;
+}
+
+.botoes {
+  display: flex;
+  width: 100%;
+  gap: 1px;
+}
+.botoes span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  padding: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: ease-out 500ms;
+}
+
+.botoes span:hover {
+  background-color: #333;
+}
+
+.botoes .iniciar {
+  width: 40%;
+  border-radius: 0 0 0 10px;
+}
+.botoes .editar {
+  width: 40%;
+  border-radius: 0;
+}
+.botoes .deletar {
+  width: 20%;
+  border-radius: 0 0 10px 0;
+}
