@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+  font-family: "Sora", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 20vw;
+  padding: 10px 20px;
+  background: linear-gradient(to bottom, #6b6b6b, #d0d0d0);
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  display: flex;
+  gap: 1vw;
+}
+header ul li {
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  background: #d0d0d0;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.user-image {
+  width: 200px;
+  height: 200px;
+  background-color: #525151;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user h3 {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.menu {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button-menu {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button-menu h3 {
+  background-color: #717171;
+  width: 15vw;
+  padding: 3vh;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s;
+}
+
+.button-menu h3:hover{
+background-color: #454545;
+}

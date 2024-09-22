@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+  font-family: "Sora", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container-settings {
+  min-width: 40%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 20vw;
+  padding: 10px 20px;
+  background: linear-gradient(to bottom, #6b6b6b, #d0d0d0);
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  display: flex;
+  gap: 1vw;
+}
+
+header ul li{
+  cursor: pointer;
+}
+
+main {
+  background: #d0d0d0;
+  padding: 2vh;
+  overflow-y: auto;
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.user-image {
+  width: 200px;
+  height: 200px;
+  background-color: #909090;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user h3 {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.menu {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.menu-container {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button-menu {
+  background-color: #717171;
+  width: 15vw;
+  padding: 3vh;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.title {
+  position: absolute;
+  top: 20%;
+  font-size: 36px;
+  color: #717171;
+}
+
+.button-menu {
+  background-color: #717171;
+  width: 18vw;
+  min-width: 150px;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-family: "Sora";
+  transition: background-color 0.3s;
+}
+
+.button-menu:hover {
+  background-color: #454545;
+}
+
+.user-section {
+  padding-top: 6vh;
+}
+
+.match-section {
+  padding-top: 15vh;
+}
+
+.match-section input {
+  width: 18vw;
+  height: 8vh;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding-left: 2vw;
+  font-size: 24px;
+  min-width: 150px;
+  border: solid 1px #ddd;
+  font-style: italic;
+  transition: border-color 0.5s;
+  font-family: "Sora";
+}
+
+.match-section input:focus {
+  border-color: #333;
+}
+
+.criar-partida {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-section span {
+  margin-top: 3vh;
+  margin-bottom: -1vh;
+  font-size: 24px;
+  font-family: "Montserrat";
+  color: #717171;
+  font-style: italic;
+}
+
+.username {
+  font-size: 40px;
+  font-family: 'Sora';
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.fade-out {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-out.fade {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-in.active {
+  opacity: 1;
+}
