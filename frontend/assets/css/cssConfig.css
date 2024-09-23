@@ -1,0 +1,539 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+.sidebar {
+  width: 5vw;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vh 0;
+  transition: width 0.3s ease;
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-item {
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s, padding-left 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.menu:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  padding-left: 1.5em;
+  border-radius: 10px;
+}
+
+.menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background-color: transparent;
+  transition: background-color 0.3s, top 0.3s;
+}
+
+.menu:hover::before {
+  background-color: #00bfa6;
+}
+
+.user-option {
+  width: 100%;
+  padding: 0 1em;
+  margin: 1em auto;
+  cursor: pointer;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  color: #333;
+  height: 100%;
+  background-color: #d0d0d0;
+}
+
+.content header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 9%;
+  margin-bottom: 25px;
+  width: 80%;
+}
+
+.header-text {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content header h2 {
+  min-width: 50%;
+  font-family: "Sora";
+  color: #909090;
+}
+
+.results {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 40%;
+}
+
+.section-list {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.section-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.section-list::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 30px;
+}
+
+.section-list::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 30px;
+}
+
+.mid-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  height: 80%;
+}
+
+#mid-one {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 30%;
+  margin-right: 32rem;
+}
+
+#profile-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+  gap: 8px;
+}
+
+#text-photo-profile {
+  display: flex;
+  text-align: center;
+  width: 80%;
+}
+
+.circle-area {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.profile-circle {
+  position: relative;
+}
+
+#camera-change {
+  position: absolute;
+  right: 10%;
+  top: 80%;
+  font-size: 24px;
+  background-color: #000000;
+  color: rgb(202, 202, 202);
+  padding: 0.6rem;
+  border-radius: 50%;
+}
+
+#photo-profile-description {
+  color: black;
+  font-family: Sora;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+#text-visualization {
+  display: flex;
+  text-align: center;
+  width: 60%;
+}
+
+#text-pre-visu {
+  color: rgb(22, 22, 22);
+  font-family: Sora;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.logout-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-button button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 14px;
+  background-color: rgb(113, 113, 113);
+  height: 80%;
+  width: 15rem;
+  border-radius: 0.5rem;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: "Montserrat";
+  font-weight: 600;
+  text-align: center;
+  font-size: 17px;
+  color: white;
+}
+
+.logout-button button:hover {
+  box-shadow: 0px 5px 4px 0 rgba(0, 0, 0, 0.225);
+  transition: box-shadow 0.2s;
+}
+
+.logout-button img {
+  height: 100%;
+}
+
+#mid-two {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 35%;
+  height: 100%;
+  margin-right: 30px;
+}
+
+#data-area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  gap: 6px;
+  margin-top: 25px;
+}
+
+#info-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#text-info {
+  color: black;
+  font-family: Sora;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+#area-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+#data-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 5px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 5px;
+  width: 100%;
+  gap: 4px;
+}
+
+.input-box input {
+  background: rgb(247, 247, 247);
+  padding: 0.6em 1em;
+  width: 100%;
+  border: none;
+  border-radius: 7px;
+  font-family: Sora;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.input-box input:focus {
+  border-color: #333;
+}
+
+.input-box i {
+  position: absolute;
+  top: 66%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #353434;
+  font-size: 20px;
+}
+
+.label-form {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(22, 22, 22);
+}
+
+#delete-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 80%;
+  width: 32%;
+  border-radius: 0.8rem;
+  padding: 15px;
+  cursor: pointer;
+  border: 3px solid rgb(113, 113, 113);
+  font-family: "Montserrat";
+  font-weight: 800;
+  color: rgb(113, 113, 113);
+  font-size: 10px;
+  background-color: #d0d0d0;
+}
+
+.delete-button:hover {
+  box-shadow: 0px 5px 4px 0 rgba(0, 0, 0, 0.225);
+  transition: box-shadow 0.2s;
+}
+
+#delete-text-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
+  width: 100%;
+}
+
+#delete-alert {
+  font-family: Sora;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  font-size: 10px;
+}
+
+#text-perm {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+.confirm-button {
+  background-color: rgb(113, 113, 113);
+  height: 70%;
+  width: 15rem;
+  border-radius: 0.8rem;
+  padding: 10px 25px 10px 25px;
+  border: none;
+  cursor: pointer;
+  font-family: "Montserrat";
+  font-weight: 600;
+  text-align: center;
+  color: white;
+}
+
+.confirm-button:hover {
+  box-shadow: 0px 5px 4px 0 rgba(0, 0, 0, 0.225);
+  transition: box-shadow 0.2s;
+}
+
+.modal-delete {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 25%;
+  margin-top: 250px;
+  margin-left: 520px;
+  overflow: hidden;
+  border: none;
+  border-radius: 10px;
+}
+
+.content-modal {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 20px;
+  color: #333;
+  height: 70%;
+  background-color: #d0d0d0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+#text-no {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  height: 30%;
+}
+
+.modal-delete-area button {
+  border: none;
+  width: 50%;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.5);
+}
+
+#cancel-button {
+  background-color: #717171;
+  border-bottom-left-radius: 10px;
+  cursor: pointer;
+}
+
+#deleteAccount-button {
+  background-color: #a3a3a3;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+}
+
+.modal-confirm {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 25%;
+  margin-top: 250px;
+  margin-left: 520px;
+  overflow: hidden;
+  border: none;
+  border-radius: 10px;
+}
+
+.content-modal-confirm {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  height: 70%;
+  width: 100%;
+  background-color: #d0d0d0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.buttons-confirm {
+  display: flex;
+  width: 100%;
+  height: 30%;
+}
+
+.modal-confirm-area button {
+  border: none;
+  width: 100%;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+#confirm-modal-button {
+  background-color: #717171;
+  border-bottom-left-radius: 10px;
+  cursor: pointer;
+}
+
+.containerConfirm i {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  font-size: 18px;
+}

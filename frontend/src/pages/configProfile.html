@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configurações de perfil</title>
+    <link rel="stylesheet" href="/frontend/assets/css/cssConfig.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <ul>
+        <li class="sidebar-item">
+          <img src="/frontend/assets/img/lupaQuester.svg" alt="" />
+        </li>
+        <li class="sidebar-item menu">
+          <img src="/frontend/assets/img/Grid.svg" alt="" />
+        </li>
+        <li class="sidebar-item menu">
+          <img src="/frontend/assets/img/Add square.svg" alt="" />
+        </li>
+        <li class="sidebar-item menu">
+          <img src="/frontend/assets/img/Text Bullet List Square.svg" alt="" />
+        </li>
+        <li class="sidebar-item menu">
+          <img src="/frontend/assets/img/Document Copy.svg" alt="" />
+        </li>
+      </ul>
+      <ul>
+        <li class="user-option">
+          <img src="/frontend/assets/img/person-circle.svg" alt="" />
+        </li>
+      </ul>
+    </aside>
+    <main class="content">
+      <header>
+        <div class="header-text">
+          <h2>Configurações do perfil</h2>
+        </div>
+      </header>
+      <section class="mid-area">
+        <div id="mid-one">
+          <div id="profile-area">
+            <div id="text-photo-profile">
+              <p id="photo-profile-description">
+                Sua foto de perfil aparecerá<br />
+                em todas as partidas que<br />você participar.
+              </p>
+            </div>
+            <div class="circle-area">
+              <div class="profile-circle">
+                <img
+                  src="/frontend/assets/img/ellipse-profile.svg"
+                  id="profile-photo"
+                />
+                <img
+                  src="/frontend/assets/img/photo_camera.svg"
+                  id="camera-change"
+                />
+              </div>
+            </div>
+
+            <div id="text-visualization">
+              <p id="text-pre-visu">Pré-visualização da imagem de perfil</p>
+            </div>
+          </div>
+          <div class="logout-button">
+            <button type="button">
+              <img
+                src="/frontend/assets/img/logout.svg"
+                id="logout-button-icon"
+              />Logout
+            </button>
+          </div>
+        </div>
+        <div id="mid-two">
+          <div id="data-area">
+            <div id="area-form">
+              <form id="data-form">
+                <div class="input-box">
+                  <label for="name" class="label-form">Nome</label>
+                  <input type="text" id="name" name="name" class="caixa-form" />
+                </div>
+                <div class="input-box">
+                  <label for="lastname" class="label-form">Sobrenome</label>
+                  <input
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    class="caixa-form"
+                  />
+                </div>
+                <div class="input-box">
+                  <label for="user" class="label-form">User</label>
+                  <input type="text" id="user" class="user" name="surname" />
+                </div>
+                <div class="input-box">
+                  <label for="email" class="label-form">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="caixa-form"
+                  />
+                </div>
+
+                <div class="input-box">
+                  <label for="password" class="label-form">Senha</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="caixa-form"
+                  />
+                  <i class="bi bi-eye-fill" id="iconEye"></i>
+                </div>
+              </form>
+            </div>
+            <div id="delete-area">
+              <button type="submit" class="delete-button">Excluir conta</button>
+              <div id="delete-text-area">
+                <p id="delete-alert">
+                  Uma vez excluída, sua conta será perdida
+                  <span id="text-perm">permanentemente</span> sem opção de
+                  recuperação.
+                </p>
+              </div>
+            </div>
+            <button type="submit" class="confirm-button">Confirmar</button>
+          </div>
+        </div>
+      </section>
+      <section class="modal-delete-area">
+        <dialog class="modal-delete">
+          <div class="content-modal">
+            <p>
+              Tem certeza que deseja excluir sua conta? Ela
+              <span id="text-no">NÃO</span> poderá ser recuperada.
+            </p>
+          </div>
+          <div class="buttons">
+            <button id="cancel-button">Cancelar</button>
+            <button id="deleteAccount-button">Excluir conta</button>
+          </div>
+        </dialog>
+      </section>
+      <section class="modal-confirm-area">
+        <dialog class="modal-confirm">
+          <div class="content-modal-confirm">
+            <p>Informações salvas <br />com sucesso!</p>
+          </div>
+          <div class="buttons-confirm">
+            <button id="confirm-modal-button">Confirmar</button>
+          </div>
+        </dialog>
+      </section>
+    </main>
+    <script src="/frontend/src/scripts/configJS.js"></script>
+  </body>
+</html>
