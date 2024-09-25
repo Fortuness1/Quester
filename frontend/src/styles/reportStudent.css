@@ -6,22 +6,36 @@
   box-sizing: border-box;
 }
 
-html,
 body {
+  font-family: "Sora", sans-serif;
+  background: #d0d0d0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  height: 100vh;
+  flex-direction: column;
   width: 100vw;
+  height: 100vh;
+  min-width: 320px; /* Garantir mínimo para dispositivos móveis */
+  overflow: hidden;
+  padding: 2vw; /* Margem flexível */
 }
 
-html {
-  font-size: 62.5%;
+/* Configurações gerais para containers */
+.container-settings {
+  width: 100%;
+  max-width: 600px;
+  min-width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3vw;
+  margin: 2vh 1vw;
+  border-radius: 10px;
 }
 
-body {
-  font-size: 1.6rem;
+#profile-photo{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
 }
 
 .container {
@@ -31,7 +45,11 @@ body {
 }
 
 .sidebar {
-  width: 5vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 5vw; /* Largura flexível */
+  min-width: 50px;
   height: 100%;
   background-color: white;
   display: flex;
@@ -47,6 +65,8 @@ body {
   list-style: none;
   padding: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -54,15 +74,41 @@ body {
   width: 100%;
   padding: 1em;
   display: flex;
+  margin-top: 5px;
   align-items: center;
-  transition: background-color 0.3s, padding-left 0.3s;
+  justify-content: center;
+  transition: background-color 0.3s;
   cursor: pointer;
   position: relative;
 }
 
+.sidebar-item a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-icon{
+  background-color: #D9D9D9;
+  width: 80%;
+  height: 15%;
+  border-radius: 10px;
+}
+
+.select-icon::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 5px;
+  border-radius: 10px;
+  background-color: #00bfa6;
+}
+
 .menu:hover {
   background-color: rgba(0, 0, 0, 0.08);
-  padding-left: 1.5em;
   border-radius: 10px;
 }
 
@@ -89,7 +135,6 @@ body {
 }
 
 .content {
-  flex-grow: 1;
   padding: 20px;
   color: #333;
   height: 100%;
@@ -115,7 +160,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 34%;
+  height: 30%;
 }
 
 .info {
@@ -126,16 +171,23 @@ body {
   gap: 8px;
 }
 
-.info h2,
+.info h2{
+  font-family: "Sora";
+  font-weight: 800;
+  font-size: 26px;
+  color: #333;
+}
+
 .info h4 {
   font-family: "Montserrat";
   font-weight: 600;
+  font-size: 16px;
 }
 
 .info p {
   font-family: "Montserrat";
   font-weight: 600;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .info img {
@@ -161,7 +213,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 40%;
+  height: 50%;
 }
 
 .section-list {
@@ -264,4 +316,8 @@ footer {
 
 .exit-btn:hover {
   background-color: #555;
+}
+
+main{
+  margin-left: 6vw;
 }
