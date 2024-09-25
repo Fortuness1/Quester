@@ -7,7 +7,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/frontend/src/styles/register.css" />
+    <link rel="stylesheet" href="../styles/register.css" />
     <title>Register</title>
   </head>
   <body>
@@ -17,12 +17,12 @@
           <ul>
             <li>
               <a href="#"
-                ><img src="/frontend/assets/img/blackLogo.svg" alt=""
+                ><img src="../../assets/icon/blackLogo.svg" alt=""
               /></a>
             </li>
             <li>
               <a href="#">
-                <img src="/frontend/assets/icon/interrogacao.svg" alt=""
+                <img src="../../assets/icon/interrogacao.svg" alt=""
               /></a>
             </li>
           </ul>
@@ -117,7 +117,7 @@
             </form>
             <div class="login-link">
               <p>
-                Já está cadastrado? <a href="index.html">Faça seu log-in</a>
+                Já está cadastrado? <a href="../../index.html">Faça seu log-in</a>
               </p>
             </div>
           </div>
@@ -215,14 +215,14 @@
               localStorage.setItem("userId", data._id);
               localStorage.setItem(
                 "occupation",
-                userData.email.endsWith("@alu.ufc.br") ? "STUDENT" : "TEACHER"
+                data.occupation
               );
 
               // Redirecionar com base na ocupação
-              if (userData.email.endsWith("@virtual.ufc.br")) {
-                window.location.href = "profHome.html";
-              } else if (userData.email.endsWith("@alu.ufc.br")) {
-                window.location.href = "alunoHome.html";
+              if (data.occupation == "TEACHER") {
+                window.location.href = "./profHome.html";
+              } else if (data.occupation == "STUDENT") {
+                window.location.href = "./alunoHome.html";
               }
             } else if (response.status === 409) {
               messageDiv.textContent = "Email já registrado.";

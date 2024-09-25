@@ -7,50 +7,55 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/frontend/src/styles/alunoHome.css" />
+    <link rel="stylesheet" href="../styles/alunoHome.css" />
     <title>Home</title>
   </head>
   <body>
     <nav class="sidebar">
       <ul>
         <li class="sidebar-item">
-          <a href="alunoHome.html">
-          <img src="/frontend/assets/img/lupaQuester.svg" alt="" />
+          <a href="./alunoHome.html">
+          <img src="../../assets/icon/lupaQuester.svg" alt="" />
           </a>
         </li>
-        <li class="sidebar-item menu">
-          <a href="criarPartida.html">
-            <img src="/frontend/assets/icon/Play.svg" alt="Play" />
+        <li class="sidebar-item menu" title="Entrar Partida">
+          <a href="./alunoHome.html">
+            <img src="../../assets/icon/play-select.svg" alt="Play" />
           </a>
         </li>
-        <li class="sidebar-item menu">
-          <a href="partidasGuardadas.html">
-            <img src="/frontend/assets/icon/Grid.svg" alt="Partidas Guardadas" />
+        <li class="sidebar-item menu" title="Criar Partida">
+          <a href="./criarPartida.html">
+            <img src="../../assets/icon/add-square.svg" alt="Play" />
           </a>
         </li>
-        <li class="sidebar-item menu">
+        <li class="sidebar-item menu" title="Partidas Guardadas">
+          <a href="./partidasGuardadas.html">
+            <img src="../../assets/icon/Grid.svg" alt="Lista de Questões" />
+          </a>
+        </li>
+        <li class="sidebar-item menu" title="Lista de Questões">
           <a href="testeCriarQuestao.html">
             <img
-              src="/frontend/assets/icon/Text Bullet List Square.svg"
+              src="../../assets/icon/Text Bullet List Square.svg"
               alt="Lista de Questões"
             />
           </a>
         </li>
-        <li class="sidebar-item menu">
-          <!-- <a href="historico.html"> -->
-            <img src="/frontend/assets/icon/Document Copy.svg" alt="Historico de Partidas" />
-          <!-- </a> -->
+        <li class="sidebar-item menu" title="Historico de Partidas">
+          <a href="historico.html">
+            <img src="../../assets/icon/Document Copy.svg" alt="Historico de Partidas" />
+          </a>
         </li>
       </ul>
       <ul>
-        <li class="user-option">
-          <a href="profile.html">
-            <img src="/frontend/assets/icon/person-circle.svg" alt="Profile" />
+        <li class="user-option" title="Configuração de Perfil">
+          <a href="./configProfile.html">
+            <img src="../../assets/icon/person-circle.svg" alt="Profile" />
           </a>
         </li>
-        <li class="user-option">
-          <a href="logout.html">
-            <img src="/frontend/assets/icon/Arrow Exit.svg" alt="Logout" />
+        <li class="user-option"  title="Logout">
+          <a href="../../index.html" id="logout">
+            <img src="../../assets/icon/Arrow Exit.svg" alt="Logout" />
           </a>
         </li>
       </ul>
@@ -65,11 +70,11 @@
         <h2>Bem-vindo, <span id="userName"></span>!</h2>
         <div class="input-box">
           <form action="">
-            <input type="text" name="pin" id="pin" placeholder="PIN" required />
+            <input type="number" name="pin" id="pin" placeholder="PIN" required class="no-spinner"/>
           </form>
         </div>
 
-        <h3 class="button-menu">Entrar</h3>
+        <h3 class="button-menu" id="button-pin">Entrar</h3>
       </div>
     </main>
     <script>
@@ -87,7 +92,6 @@
               },
               body: JSON.stringify({ _id: userId }),
             });
-
             if (response.ok) {
               const userData = await response.json();
               // Exibir as informações do usuário na tela
@@ -96,16 +100,57 @@
               ).textContent = `${userData.surname}`;
             } else {
               // Se o usuário não for encontrado ou ocorrer um erro, redirecionar para a página de login
-              window.location.href = "login.html";
+              localStorage.clear()
+              window.location.href = "../../index.html";
             }
           } catch (error) {
             console.error("Erro ao buscar informações do usuário:", error);
-            window.location.href = "login.html"; // Redireciona em caso de erro
+            localStorage.clear()
+            window.location.href = "../../index.html"; // Redireciona em caso de erro
           }
         } else {
           // Redireciona para a página de login se não houver informações no localStorage
-          window.location.href = "login.html";
+          localStorage.clear()
+          window.location.href = "../../index.html";
         }
+
+        const logoutButton = document.getElementById("logout");
+        logoutButton.addEventListener("click", function () {
+          localStorage.removeItem("userId");
+          localStorage.removeItem("occupation");
+        });
+
+        const buttonPin = document.getElementById("button-pin");
+        buttonPin.addEventListener("click", async function () {
+          console.error("Erro na requisição:");
+          const pinInput = document.getElementById("pin");
+          const pin = pinInput.value;
+
+          if (!pin) {
+            return;
+          }
+
+          try {
+            const response = await fetch(`http://localhost:3000/match/enter/${pin}`, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              localStorage.setItem("matchId", data.id_match);
+              localStorage.setItem("matchRole", "PLAYER");
+              window.location.href = "./MatchScreen.html";
+            } else {
+              console.error("Erro na requisição:", error);
+              pinInput.style.border = "#ff0000 2px solid"
+            }
+          } catch (error) {
+            console.error("Erro na requisição:", error);
+            pinInput.style.border = "#ff0000 2px solid"
+          }
+        });
       });
     </script>
   </body>
