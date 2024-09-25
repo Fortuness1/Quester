@@ -18,17 +18,22 @@
           <img src="../../assets/icon/lupaQuester.svg" alt="" />
           </a>
         </li>
-        <li class="sidebar-item select-icon" title="Entrar Partida">
-          <a href="./criarPartida.html">
+        <li class="sidebar-item menu" title="Entrar Partida">
+          <a href="./alunoHome.html">
             <img src="../../assets/icon/play-select.svg" alt="Play" />
           </a>
         </li>
-        <li class="sidebar-item menu">
-          <a href="./partidasGuardadas.html">
-            <img src="../../assets/icon/Grid.svg" alt="Partidas Guardadas" />
+        <li class="sidebar-item menu" title="Criar Partida">
+          <a href="./criarPartida.html">
+            <img src="../../assets/icon/add-square.svg" alt="Play" />
           </a>
         </li>
-        <li class="sidebar-item menu">
+        <li class="sidebar-item menu" title="Partidas Guardadas">
+          <a href="./partidasGuardadas.html">
+            <img src="../../assets/icon/Grid.svg" alt="Lista de Questões" />
+          </a>
+        </li>
+        <li class="sidebar-item menu" title="Lista de Questões">
           <a href="testeCriarQuestao.html">
             <img
               src="../../assets/icon/Text Bullet List Square.svg"
@@ -36,19 +41,19 @@
             />
           </a>
         </li>
-        <li class="sidebar-item menu">
-          <!-- <a href="historico.html"> -->
+        <li class="sidebar-item menu" title="Historico de Partidas">
+          <a href="historico.html">
             <img src="../../assets/icon/Document Copy.svg" alt="Historico de Partidas" />
-          <!-- </a> -->
+          </a>
         </li>
       </ul>
       <ul>
-        <li class="user-option">
-          <a href="profile.html">
+        <li class="user-option" title="Configuração de Perfil">
+          <a href="./configProfile.html">
             <img src="../../assets/icon/person-circle.svg" alt="Profile" />
           </a>
         </li>
-        <li class="user-option">
+        <li class="user-option"  title="Logout">
           <a href="../../index.html" id="logout">
             <img src="../../assets/icon/Arrow Exit.svg" alt="Logout" />
           </a>
@@ -87,14 +92,12 @@
               },
               body: JSON.stringify({ _id: userId }),
             });
-            console.log("erros")
             if (response.ok) {
               const userData = await response.json();
               // Exibir as informações do usuário na tela
               document.getElementById(
                 "userName"
               ).textContent = `${userData.surname}`;
-              console.log("erros")
             } else {
               // Se o usuário não for encontrado ou ocorrer um erro, redirecionar para a página de login
               localStorage.clear()
@@ -119,6 +122,7 @@
 
         const buttonPin = document.getElementById("button-pin");
         buttonPin.addEventListener("click", async function () {
+          console.error("Erro na requisição:");
           const pinInput = document.getElementById("pin");
           const pin = pinInput.value;
 
@@ -127,20 +131,19 @@
           }
 
           try {
-            const response = await fetch("http://localhost:3000/match", {
-              method: "POST",
+            const response = await fetch(`http://localhost:3000/match/enter/${pin}`, {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ pin }),
             });
 
             if (response.ok) {
               const data = await response.json();
-              // Redirecionar para a página da partida
-              window.location.href = `./partida.html?matchId=${data._id}`;
+              localStorage.setItem("matchId", data.id_match);
+              localStorage.setItem("matchRole", "PLAYER");
+              window.location.href = "./MatchScreen.html";
             } else {
-              const messageDiv = document.getElementById("message");
+              console.error("Erro na requisição:", error);
               pinInput.style.border = "#ff0000 2px solid"
             }
           } catch (error) {
