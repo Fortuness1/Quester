@@ -47,6 +47,9 @@ exports.createMatch = async (req, res) => {
 
         if(req.body._id_waiting_match) {
             const deleteWaitingMatch = await WaitingMatchModel.findByIdAndDelete(req.body._id_waiting_match);
+            const removeWaitingMatch = await UserModel.findByIdAndUpdate(
+                req.body._id, { $pull: { waiting_matches: req.body._id_waiting_match }}
+            )
         }
      
         return res.status(201).json(
