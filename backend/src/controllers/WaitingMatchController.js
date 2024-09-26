@@ -178,7 +178,7 @@ exports.duplicateWaitingMatch = async (req, res) => {
         const saveWaitingMatch = await WaitingMatchDuplicate.save();
 
         const Usersave = await UserModel.findByIdAndUpdate(
-            req.params.id, { $push: { waiting_matches: WaitingMatchDuplicate }}
+            req.body._id, { $push: { waiting_matches: WaitingMatchDuplicate }}
         );
         
         return res.status(201).json({ "status": "waiting match duplicated" });
