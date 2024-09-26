@@ -29,6 +29,7 @@ routes.post('/question', questionController.createQuestion);
 routes.get('/question/:id', questionController.findQuestions);
 routes.put('/question/', questionController.updateQuestion);
 routes.post('/duplicate-question', questionController.duplicateQuestion);
+routes.get('/question/find/:idquestion', questionController.getQuestionByID);
 routes.delete('/question/:iduser/:idquestion', questionController.deleteQuestion);
 
 //Match

@@ -162,3 +162,20 @@ exports.deleteQuestion = async (req, res) => {
         }
     }
 };
+
+exports.getQuestionByID = async (req, res) => {
+    try {
+        var idQuestion = req.params.idquestion;
+        
+        const question = await QuestionModel.findById(idQuestion);
+
+        return res.status(200).json(question);
+    } catch (err) {
+        console.log(err)
+        if(err.path == 'questions'){
+            return res.status(404).json({ error: "question not found" });
+        } else {
+            return res.status(500).json({ error: err.message });
+        }
+    }
+};
