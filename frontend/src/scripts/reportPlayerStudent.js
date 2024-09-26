@@ -52,7 +52,11 @@ const setInformationMatchHTML = (dataMatch) => {
     nameMatch.innerHTML = capitalizeFirstLetter(dataMatch.name);
 
     const descriptionMatch = document.getElementById("description-match");
-    descriptionMatch.innerHTML = capitalizeFirstLetter(dataMatch.description);;
+    if(dataMatch.description === undefined) {
+        descriptionMatch.style.display = "none";
+    } else {
+        descriptionMatch.innerHTML = capitalizeFirstLetter(dataMatch.description);
+    }
 
     const timerMatch = document.getElementById("timer-match");
     timerMatch.innerHTML = `${dataMatch.data} - ${dataMatch.time}`;
@@ -66,7 +70,7 @@ const setInformationMatchHTML = (dataMatch) => {
     numberQuestions.innerHTML = `${dataMatch.questions.length} perguntas`;
 
     const timerQuestions = document.getElementById("timer-questions");
-    timerQuestions.innerHTML = `Tempo por pergunta: ${dataMatch.question_times} segundos`;
+    timerQuestions.innerHTML = `${dataMatch.question_times} segundos por questão`;
 
     const numberPlayers = document.getElementById("number-players");
     numberPlayers.innerHTML = `${dataMatch.players.length} jogadores`;
@@ -83,6 +87,7 @@ const setInformationMatchHTML = (dataMatch) => {
         }else{
             img.src = "../../assets/icon/checkmark red circle.svg";
         }
+        img.classList.add("icon-checkmark");
         questionContainer.appendChild(img);
 
         const contentContainer = document.createElement("div");

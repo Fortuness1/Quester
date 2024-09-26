@@ -147,7 +147,7 @@ body {
   align-items: center;
   min-height: 9%;
   max-width: 40%;
-  margin-bottom: 25px;
+  margin-bottom: 8px;
 }
 
 .content header h2 {
@@ -180,19 +180,20 @@ body {
 
 .info h4 {
   font-family: "Montserrat";
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .info p {
   font-family: "Montserrat";
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
+  margin-left: 2px;
 }
 
 .info img {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
 }
 
 .match-description {
@@ -291,6 +292,11 @@ body {
   justify-content: space-between;
   background-color: #fff;
   color: #333;
+}
+
+.icon-checkmark{
+  width: 30px;
+  height: 30px;
 }
 
 footer {
