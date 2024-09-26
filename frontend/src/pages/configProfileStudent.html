@@ -4,37 +4,62 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Configurações de perfil</title>
-    <link rel="stylesheet" href="/frontend/assets/css/cssConfig.css" />
+    <link rel="stylesheet" href="../styles/configProfileStudent.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
   </head>
   <body>
-    <aside class="sidebar">
+    <nav class="sidebar">
       <ul>
         <li class="sidebar-item">
-          <img src="/frontend/assets/img/lupaQuester.svg" alt="" />
+          <a href="./alunoHome.html">
+          <img src="../../assets/icon/lupaQuester.svg" alt="" />
+          </a>
         </li>
-        <li class="sidebar-item menu">
-          <img src="/frontend/assets/img/Grid.svg" alt="" />
+        <li class="sidebar-item menu" title="Entrar Partida">
+          <a href="./alunoHome.html">
+            <img src="../../assets/icon/Play.svg" alt="Play" />
+          </a>
         </li>
-        <li class="sidebar-item menu">
-          <img src="/frontend/assets/img/Add square.svg" alt="" />
+        <li class="sidebar-item menu" title="Criar Partida">
+          <a href="./criarPartida.html">
+            <img src="../../assets/icon/add-square.svg" alt="Play" />
+          </a>
         </li>
-        <li class="sidebar-item menu">
-          <img src="/frontend/assets/img/Text Bullet List Square.svg" alt="" />
+        <li class="sidebar-item menu" title="Partidas Guardadas">
+          <a href="./partidasGuardadas.html">
+            <img src="../../assets/icon/Grid.svg" alt="Lista de Questões" />
+          </a>
         </li>
-        <li class="sidebar-item menu">
-          <img src="/frontend/assets/img/Document Copy.svg" alt="" />
+        <li class="sidebar-item menu" title="Lista de Questões">
+          <a href="testeCriarQuestao.html">
+            <img
+              src="../../assets/icon/Text Bullet List Square.svg"
+              alt="Lista de Questões"
+            />
+          </a>
+        </li>
+        <li class="sidebar-item menu" title="Historico de Partidas">
+          <a href="historico.html">
+            <img src="../../assets/icon/Document Copy.svg" alt="Historico de Partidas" />
+          </a>
         </li>
       </ul>
       <ul>
-        <li class="user-option">
-          <img src="/frontend/assets/img/person-circle.svg" alt="" />
+        <li class="user-option" title="Configuração de Perfil">
+          <a href="./configProfile.html">
+            <img src="../../assets/icon/person-circle.svg" alt="Profile" id="profile-photo" />
+          </a>
+        </li>
+        <li class="user-option"  title="Logout">
+          <a href="../../index.html" id="logout">
+            <img src="../../assets/icon/Arrow Exit.svg" alt="Logout"/>
+          </a>
         </li>
       </ul>
-    </aside>
+    </nav>
     <main class="content">
       <header>
         <div class="header-text">
@@ -51,26 +76,18 @@
               </p>
             </div>
             <div class="circle-area">
-              <div class="profile-circle">
-                <img
-                  src="/frontend/assets/img/ellipse-profile.svg"
-                  id="profile-photo"
-                />
-                <img
-                  src="/frontend/assets/img/photo_camera.svg"
-                  id="camera-change"
-                />
-              </div>
+              <img class="profile-circle" id="profile-circle">
+              <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+            </img>
             </div>
-
             <div id="text-visualization">
               <p id="text-pre-visu">Pré-visualização da imagem de perfil</p>
             </div>
           </div>
           <div class="logout-button">
-            <button type="button">
+            <button type="button" id="logout-button">
               <img
-                src="/frontend/assets/img/logout.svg"
+                src="../../assets/icon/logout.svg"
                 id="logout-button-icon"
               />Logout
             </button>
@@ -94,8 +111,8 @@
                   />
                 </div>
                 <div class="input-box">
-                  <label for="user" class="label-form">User</label>
-                  <input type="text" id="user" class="user" name="surname" />
+                  <label for="surname" class="label-form">User</label>
+                  <input type="text" id="surname" class="user" name="surname" />
                 </div>
                 <div class="input-box">
                   <label for="email" class="label-form">Email</label>
@@ -120,7 +137,7 @@
               </form>
             </div>
             <div id="delete-area">
-              <button type="submit" class="delete-button">Excluir conta</button>
+              <button class="delete-button" id="delete-user-button">Excluir conta</button>
               <div id="delete-text-area">
                 <p id="delete-alert">
                   Uma vez excluída, sua conta será perdida
@@ -129,35 +146,11 @@
                 </p>
               </div>
             </div>
-            <button type="submit" class="confirm-button">Confirmar</button>
+            <button class="confirm-button" id="configProfile">Confirmar</button>
           </div>
         </div>
       </section>
-      <section class="modal-delete-area">
-        <dialog class="modal-delete">
-          <div class="content-modal">
-            <p>
-              Tem certeza que deseja excluir sua conta? Ela
-              <span id="text-no">NÃO</span> poderá ser recuperada.
-            </p>
-          </div>
-          <div class="buttons">
-            <button id="cancel-button">Cancelar</button>
-            <button id="deleteAccount-button">Excluir conta</button>
-          </div>
-        </dialog>
-      </section>
-      <section class="modal-confirm-area">
-        <dialog class="modal-confirm">
-          <div class="content-modal-confirm">
-            <p>Informações salvas <br />com sucesso!</p>
-          </div>
-          <div class="buttons-confirm">
-            <button id="confirm-modal-button">Confirmar</button>
-          </div>
-        </dialog>
-      </section>
     </main>
-    <script src="/frontend/src/scripts/configJS.js"></script>
+    <script src="../scripts/configProfile.js"></script>
   </body>
 </html>
