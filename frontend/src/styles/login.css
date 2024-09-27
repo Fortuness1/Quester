@@ -10,7 +10,7 @@
 html,
 body {
   font-family: "Sora", sans-serif;
-  background: #d0d0d0;
+  background: #F5F3F7;
 }
 
 .main-container {
@@ -66,9 +66,14 @@ main {
   max-height: 650px;
   max-width: 580px;
   min-width: 250px;
-  background-color: #a0a0a0;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 0 0 200px;
+}
+
+.image-mascot img {
+  width: 68%;
 }
 
 .points {
@@ -110,7 +115,7 @@ main {
   font-size: 48px;
   margin-bottom: 30px;
   text-align: center;
-  color: #333;
+  color: #6E4FC8;
 }
 
 .input-box {
@@ -123,19 +128,20 @@ main {
   min-width: 350px;
   height: 8vh;
   padding: 15px 50px 15px 90px;
-  border: 1px solid #ddd;
+  border: 2px solid #6E4FC8;
   border-radius: 10px;
   font-size: 24px;
   color: #333;
   outline: none;
   font-style: italic;
+  background-color: #FFFFFF;
   transition: border-color 0.5s;
   font-weight: 500;
   font-family: "Montserrat";
 }
 
 .input-box input:focus {
-  border-color: #333;
+  border-color: #FF6600;
 }
 
 .input-box i {
@@ -157,6 +163,7 @@ main {
 
 .input-box label {
   font-size: 24px;
+  color: #6E4FC8
 }
 
 button[type="submit"] {
@@ -164,7 +171,7 @@ button[type="submit"] {
   height: 8vh;
   min-width: 150px;
   padding: 15px;
-  background-color: #717171;
+  background-color: #FF6600;
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -174,12 +181,15 @@ button[type="submit"] {
   font-family: "Montserrat";
   font-weight: 600;
   font-size: 24px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   margin-top: 20px;
 }
 
 button[type="submit"]:hover {
-  background-color: #454545;
+  background-color: #f56200;
+}
+
+button[type="submit"]:active {
+  background-color: #e05a00;
 }
 
 .register-link {

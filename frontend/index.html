@@ -7,6 +7,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="icon" href="./assets/icon/new-logo-quester.svg" type="image/x-icon" />
     <link rel="stylesheet" href="./src/styles/login.css" />
     <title>Login</title>
   </head>
@@ -17,7 +18,7 @@
           <ul>
             <li>
               <a href="#">
-                <img src="./assets/icon/blackLogo.svg" alt="" />
+                <img src="./assets/icon/new-long-logo.svg" alt="" />
               </a>
             </li>
             <li>
@@ -30,13 +31,15 @@
       </header>
       <main>
         <div class="container-mascot container-settings">
-          <div class="image-mascot"></div>
-          <div class="points">
+          <div class="image-mascot">
+            <img src="./assets/img/quester-login.png" alt="">
+          </div>
+          <!-- <div class="points">
             <div class="point selected"></div>
             <div class="point"></div>
             <div class="point"></div>
             <div class="point"></div>
-          </div>
+          </div> -->
         </div>
         <div class="login-container container-settings">
           <div class="login-box">
@@ -67,7 +70,6 @@
                 <i class="material-icons">lock</i>
               </div>
               <div id="email-error" class="error-message"></div>
-
               <button type="submit">Entrar</button>
             </form>
 
@@ -88,9 +90,9 @@
 
               if (userId && occupation) {
                 if (occupation === "STUDENT") {
-                  window.location.href = "./src/pages/alunoHome.html";
+                  window.location.href = "../src/pages/alunoHome.html";
                 } else if (occupation === "TEACHER") {
-                  window.location.href = "./src/pages/profHome.html";
+                  window.location.href = "../src/pages/profHome.html";
                 }
               }
       });
