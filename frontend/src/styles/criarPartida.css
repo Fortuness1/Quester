@@ -399,7 +399,7 @@ input:checked + .slider::before {
 .fixed-box {
   position: absolute;
   top: 53vh;
-  right: 6vw;
+  right: 5vw;
   width: 70px;
   height: 70px;
   padding: 10px;

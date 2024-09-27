@@ -20,7 +20,7 @@
           </a>
         </li>
         <li class="sidebar-item menu" title="Criar Partida">
-          <a href="./criarPartida.html">
+          <a href="./criarPartidaTeacher.html">
             <img src="../../assets/icon/add-square.svg" alt="Play" />
           </a>
         </li>
@@ -111,7 +111,7 @@
 
           <span
             class="crie-partida"
-            onclick="window.location.href='criarPartida.html'"
+            onclick="window.location.href='./criarPartidaTeacher.html'"
             >Criar sua primeira partida</span
           >
         </div>
@@ -276,6 +276,12 @@
         document.getElementById("duplicateModal").style.display = "flex"; // Exibe o modal
       }
 
+      const logoutButton = document.getElementById("logout");
+        logoutButton.addEventListener("click", function () {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("occupation");
+    });
+
       // Fecha o modal de duplicação
       function closeDuplicateModal() {
         document.getElementById("duplicateModal").style.display = "none"; // Oculta o modal
@@ -426,6 +432,28 @@
       // Carrega as partidas quando o DOM é carregado
       document.addEventListener("DOMContentLoaded", fetchUserMatches);
 
+      document.addEventListener("DOMContentLoaded", async () => {
+        const setphoto = await getPhoto(localStorage.getItem("userId"));
+      });
+
+      const getPhoto = async (idUSer) => {    
+    try {
+        const response = await fetch(`http://localhost:3000/profile-photo/${idUSer}`, {
+        headers: {'Content-Type': 'multipart/form-data',},
+    });
+        if (response.ok) {
+            const blob = await response.blob();
+            const imgURL = URL.createObjectURL(blob);
+            localStorage.setItem("profilePhoto", imgURL);
+            const img = document.getElementById("profile-photo");
+            img.src = imgURL;
+        } else {
+            console.error('Erro ao enviar o arquivo:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+  }
       // Seletores para os filtros
       const filtroSemestre = document.getElementById("filtroSemestre");
       const pesquisarPartida = document.getElementById("pesquisarPartida");
