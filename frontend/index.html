@@ -90,9 +90,9 @@
 
               if (userId && occupation) {
                 if (occupation === "STUDENT") {
-                  window.location.href = "../src/pages/alunoHome.html";
+                  window.location.href = "./src/pages/alunoHome.html";
                 } else if (occupation === "TEACHER") {
-                  window.location.href = "../src/pages/profHome.html";
+                  window.location.href = "./src/pages/partidasGuardadasTeacher.html";
                 }
               }
       });
@@ -128,7 +128,7 @@
               if (occupation === "STUDENT") {
                 window.location.href = "./src/pages/alunoHome.html";
               } else if (occupation === "TEACHER") {
-                window.location.href = "./src/pages/profHome.html";
+                window.location.href = "./src/pages/partidasGuardadasTeacher.html";
               }
             } else {
               document.getElementById("email-error").textContent =
