@@ -79,29 +79,6 @@ npm start
 ### Frontend
 Abra o arquivo index.html para ver a primeira pagina da aplicação.
 
-
-<a name="requisitos"></a>
-
-## :memo: Requisitos
-
-|  Código                         |  Funcionalidade            | Link                       |
-|  ----------------------------   |  --------------------------| -------------------------- |
-|  REF001                         |  Cadastro                  | [Arquivo de Cadastro](./path/to/cadastro.md) |
-|  Davi Calô Nogueira da Cruz     |  Líder & Backend           | [Arquivo de Backend](./path/to/backend.md) |
-|  Francisco Renan Cruz Borges    |  Frontend                  | [Arquivo de Frontend](./path/to/frontend.md) |
-|  Marcos Vinicius Costa Souza    |  Conteudista & Frontend    | [Arquivo de Conteúdo](./path/to/conteudo.md) |
-|  Nicole Amanda Do Nascimento Damacena   |  UI Designer       | [Arquivo de UI](./path/to/ui.md) |
-```
-
-### Explicação:
-- `Texto do Link`: Esta é a sintaxe de link do Markdown.
-  - `Texto do Link`: O texto que será exibido como link.
-  - `./caminho/para/arquivo.md`: O caminho relativo para o arquivo dentro do repositório.
-
-### Exemplo Completo:
-
-Aqui está um exemplo completo com links para arquivos específicos dentro do repositório:
-
 ```markdown
 cd .\backend\
 npm install
