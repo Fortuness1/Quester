@@ -16,22 +16,19 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
             if (response.ok) {
                 const userData = await response.json();
-                // Exibir as informações do usuário na tela
                 document.getElementById(
                     "userName"
                 ).textContent = `${userData.surname}`;
             } else {
-                // Se o usuário não for encontrado ou ocorrer um erro, redirecionar para a página de login
                 localStorage.clear()
                 window.location.href = "../../index.html";
             }
         } catch (error) {
             console.error("Erro ao buscar informações do usuário:", error);
             localStorage.clear()
-            window.location.href = "../../index.html"; // Redireciona em caso de erro
+            window.location.href = "../../index.html"; 
         }
     } else {
-        // Redireciona para a página de login se não houver informações no localStorage
         localStorage.clear()
         window.location.href = "../../index.html";
     }
@@ -63,13 +60,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 const data = await response.json();
                 localStorage.setItem("matchId", data.id_match);
                 localStorage.setItem("matchRole", "PLAYER");
-                window.location.href = "./MatchScreen.html";
+                window.location.href = '../pages/MatchScreen.html';
             } else {
                 console.error("Erro na requisição:", error);
                 pinInput.style.border = "#ff0000 2px solid"
             }
         } catch (error) {
-            console.error("Erro na requisição:", error);
+            console.error("Erro na requisição:", error.message);
             pinInput.style.border = "#ff0000 2px solid"
         }
     });

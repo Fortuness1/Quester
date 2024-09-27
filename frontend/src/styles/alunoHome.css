@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
 
-/* Reset e configurações iniciais */
 * {
   margin: 0;
   padding: 0;
@@ -10,17 +9,16 @@
 
 body {
   font-family: "Sora", sans-serif;
-  background: #d0d0d0;
+  background: #E8E2EE;
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  min-width: 320px; /* Garantir mínimo para dispositivos móveis */
+  min-width: 320px; 
   overflow: hidden;
-  padding: 2vw; /* Margem flexível */
+  padding: 2vw;
 }
 
-/* Configurações gerais para containers */
 .container-settings {
   width: 100%;
   max-width: 600px;
@@ -45,10 +43,10 @@ body {
   position: fixed;
   left: 0;
   top: 0;
-  width: 5vw; /* Largura flexível */
+  width: 5vw;
   min-width: 50px;
   height: 100%;
-  background-color: white;
+  background-color: #F8F8F9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,6 +54,7 @@ body {
   padding: 2vh 0;
   transition: width 0.3s ease;
   border-radius: 0 10px 10px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar ul {
@@ -113,15 +112,17 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  top: 0;
-  height: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
   width: 3px;
+  border-radius: 50px;
   background-color: transparent;
   transition: background-color 0.3s, top 0.3s;
 }
 
 .menu:hover::before {
-  background-color: #00bfa6;
+  background-color: #FF8C40;
 }
 
 .user-option {
@@ -131,23 +132,22 @@ body {
   cursor: pointer;
 }
 
-/* Conteúdo principal */
 main {
-  background: #d0d0d0;
+  background: #E8E2EE;
   padding: 2vh;
   overflow-y: auto;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
-  margin-left: 6vw; /* Espaço flexível baseado no tamanho da sidebar */
+  margin-left: 6vw;
   transition: margin-left 0.3s ease;
 }
 
 .mascot-image {
   width: 30vw;
-  max-width: 600px; /* Limite para telas grandes */
-  height: 500px; /* Altura adaptativa */
+  max-width: 600px;
+  height: 500px;
   background-color: #909090;
   border-radius: 10px;
   display: flex;
@@ -165,10 +165,9 @@ h2{
   top: 3.7%;
   left: 17.5%;
   font-size: 2rem;
-  color: #717171;
+  color: #6E4FC8;
 }
 
-/* Seção de entrada de dados */
 .match-section {
   width: 100%;
   padding: 2vw;
@@ -185,9 +184,9 @@ h2{
 
 .match-section input {
   width: 100%;
-  height: 6vh; /* Altura flexível */
-  padding: 1rem 3rem 1rem 1.5rem;
-  border: 1px solid #ddd;
+  height: 8vh;
+  padding: 1rem 2rem 1rem 1rem;
+  border: 3px solid #6E4FC8;
   border-radius: 10px;
   font-size: 1.5rem;
   color: #333;
@@ -208,10 +207,8 @@ h2{
     margin: 0;
 }
 
-
-/* Botão de menu */
 .button-menu {
-  background-color: #717171;
+  background-color: #FF6600;
   width: 100%;
   padding: 1rem;
   text-align: center;
