@@ -48,7 +48,7 @@ npm start
 ```
 
 ### Ligando o servidor WebSocket
-Abra o shell para digitar o seguinte comando.
+Abra o shell na raiz do projeto para digitar o seguinte comando.
 
 ```shell
 cd .\QuesterWebMatch\
