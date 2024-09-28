@@ -346,6 +346,13 @@
         const participantContainer = document.querySelector(
           ".historico-participante .grid-container"
         );
+        
+        if(selectedSemester === "none") {
+          hostContainer.querySelectorAll(".card").forEach((card) => {
+            card.style.display = "";
+          });
+          return;
+        }
 
         // Filtra partidas criadas
         const hostCards = hostContainer.querySelectorAll(".card");
