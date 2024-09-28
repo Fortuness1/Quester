@@ -48,7 +48,7 @@ body {
   padding: 2vh 0;
   transition: width 0.3s ease;
   border-radius: 0 10px 10px 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);;
 }
 
 .sidebar ul {
@@ -174,7 +174,7 @@ main {
   color: #333;
   outline: none;
   font-weight: 500;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
@@ -188,7 +188,7 @@ main {
   outline: none;
   font-weight: 500;
   font-family: "Montserrat";
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
 .partidas-guardadas {
@@ -205,6 +205,7 @@ main {
 .conteudo-card {
   width: 100%;
   background-color: white;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   border-radius: 10px 10px 0 0;
   padding: 20px;
   display: flex;
@@ -225,7 +226,7 @@ main {
   align-items: center;
   background-color: gray;
   padding: 15px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   color: white;
   font-size: 24px;
   cursor: pointer;
@@ -322,7 +323,7 @@ main {
   border: 1px solid #888; /* Borda do modal */
   width: 400px; /* Largura do modal */
   border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra do modal */
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3); /* Sombra do modal */
 }
 
 .close {
@@ -402,7 +403,7 @@ input[type="text"] {
   border-radius: 8px; /* Bordas arredondadas */
   cursor: pointer; /* Aparece como botão no hover */
   transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve para efeito 3D */
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);; /* Sombra leve para efeito 3D */
   margin-top: 50px;
 }
 .crie-partida:hover {

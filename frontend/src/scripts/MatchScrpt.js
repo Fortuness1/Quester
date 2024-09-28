@@ -110,7 +110,22 @@ document.addEventListener("DOMContentLoaded", () => {
             break
 
             case "finishMatch":
-                window.location.href = "../pages/alunoHome.html";
+                if(playerRole === "PLAYER"){
+                    localStorage.removeItem("matchId");
+                    localStorage.removeItem("matchRole");
+                    localStorage.setItem("reportMatchID", dataMatch._id);
+                    window.location.href = "./reportPlayerStudent.html";
+                } else if(localStorage.getItem("occupation") === "TEACHER"){
+                    localStorage.removeItem("matchId");
+                    localStorage.removeItem("matchRole");
+                    localStorage.setItem("reportMatchID", dataMatch._id);
+                    window.location.href = "./reportTeacher.html";
+                } else {
+                    localStorage.removeItem("matchId");
+                    localStorage.removeItem("matchRole");
+                    localStorage.setItem("reportMatchID", dataMatch._id);
+                    window.location.href = "./reportHostStudent.html";
+                }
             break
         }
     });

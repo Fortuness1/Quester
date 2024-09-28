@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../../assets/icon/new-logo-quester.svg" type="image/x-icon" />
     <link rel="stylesheet" href="../styles/partidasGuardadas.css" />
     <title>Partidas Guardadas</title>
   </head>
@@ -33,7 +34,7 @@
           </a>
         </li>
         <li class="sidebar-item menu" title="Historico de Partidas">
-          <a href="historico.html">
+          <a href="./historicoDePartidasTeacher.html">
             <img src="../../assets/icon/Document Copy.svg" alt="Historico de Partidas" />
           </a>
         </li>
@@ -92,7 +93,6 @@
         style="display: none"
       >
         <div class="container-mascote">
-          <img src="../../assets/img/g" alt="" />
           <div class="container-texto-imagem">
             <!-- <img
               src="../../assets/img/caixaPerguntaPG.png"
@@ -229,8 +229,8 @@
 
             // Adiciona evento para iniciar a partida
             iniciar.addEventListener("click", async () => {
-              localStorage.setItem("waitingMatchId", match._id); // Salva o ID da partida no localStorage
-              await startMatch(); // Chama a função que inicia a partida
+              localStorage.setItem("waitingMatchId", match._id);
+              await startMatch();
             });
 
             const editar = document.createElement("span");
@@ -568,9 +568,10 @@
           }
 
           const matchResult = await response.json();
-          alert("Partida iniciada com sucesso!");
-          // Redirecionar ou atualizar a tela conforme necessário
-          window.location.href = `match/${matchResult.id_match}`;
+          console.log("Partida criada com sucesso:", matchResult);
+          localStorage.setItem("matchId", data.id_match);
+          localStorage.setItem("matchRole", "HOST");
+          window.location.href = "../pages/MatchScreen.html";
         } catch (error) {
           console.error("Erro ao iniciar a partida:", error);
           alert("Erro ao iniciar a partida. Tente novamente.");
@@ -630,14 +631,14 @@
             const deletar = document.createElement("span");
             deletar.classList.add("deletar");
             deletar.setAttribute("data-idwaiting", match._id);
-            deletar.innerHTML = `<img src="../../assets/icon/iconDeletar.svg" alt="Deletar" />`;
+            deletar.innerHTML = `<img src="../../assets/icon/icon-delete.svg" alt="Deletar" />`;
             deletar.addEventListener("click", () => {
               openDeleteModal(match._id, card);
             });
 
             const duplicar = document.createElement("span");
             duplicar.classList.add("duplicar");
-            duplicar.innerHTML = `<img src="../../assets/icon/iconDuplicar.svg" alt="Deletar" />`;
+            duplicar.innerHTML = `<img src="../../assets/icon/bx_duplicate.svg" alt="Deletar" />`;
             duplicar.addEventListener("click", () => {
               showDuplicateModal(match._id); // Chama a função que abre o modal
             });

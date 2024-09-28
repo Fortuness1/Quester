@@ -59,7 +59,6 @@ exports.createMatch = async (req, res) => {
             }
         );	
     } catch (err) {
-        console.error(err.message);
         if(err.path === '_id') {
             return res.status(404).json({ error: "user not found" });
         } else {

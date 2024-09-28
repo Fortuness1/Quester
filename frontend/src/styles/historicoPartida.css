@@ -174,7 +174,7 @@ main {
   color: #333;
   outline: none;
   font-weight: 500;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
@@ -188,7 +188,7 @@ main {
   outline: none;
   font-weight: 500;
   font-family: "Montserrat";
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
 
 .grid-container {
@@ -229,7 +229,7 @@ main {
   align-items: center;
   background-color: gray;
   padding: 15px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   color: white;
   font-size: 24px;
   cursor: pointer;

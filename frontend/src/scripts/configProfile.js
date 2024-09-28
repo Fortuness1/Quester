@@ -131,12 +131,6 @@ const getPhoto = async (idUSer) => {
   }
 }
 
-logoutButton.addEventListener("click", function () {
-  localStorage.removeItem("userId");
-  localStorage.removeItem("occupation");
-  window.location.href = "../../index.html";
-});
-
 logoutButtonIcon.addEventListener("click", function () {
   localStorage.removeItem("userId");
   localStorage.removeItem("occupation");

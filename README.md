@@ -55,47 +55,25 @@ npm start
 ### Frontend
 Abra o arquivo index.html para ver a primeira pagina da aplicação.
 
-
 <a name="requisitos"></a>
 
 ## :memo: Requisitos
 
-|  Código                         |  Funcionalidade            | Link                       |
-|  ----------------------------   |  --------------------------| -------------------------- |
-|  REF001                         |  Cadastro                  |                            |
-|  Davi Calô Nogueira da Cruz     |  Líder & Backend           |                            |
-|  Francisco Renan Cruz Borges    |  Frontend                  |                            |
-|  Marcos Vinicius Costa Souza    |  Conteudista & Frontend    |                            |
-|  Nicole Amanda Do Nascimento Damacena   |  UI Designer       |                            |
-Para adicionar um link para um arquivo do repositório dentro de uma tabela em Markdown, você pode usar a sintaxe de link do Markdown. Aqui está um exemplo de como fazer isso com base no trecho fornecido:
-
-### Exemplo Atualizado:
-
-```markdown
-cd .\backend\
-npm install
-npm start
-```
-### Frontend
-Abra o arquivo index.html para ver a primeira pagina da aplicação.
-
-```markdown
-cd .\backend\
-npm install
-npm start
-```
-### Frontend
-Abra o arquivo index.html para ver a primeira pagina da aplicação.
-
-
-<a name="requisitos"></a>
-
-## :memo: Requisitos
-
-|  Código                         |  Funcionalidade            | Link                       |
-|  ----------------------------   |  --------------------------| -------------------------- |
-|  REF001                         |  Cadastro                  | [Geral](./frontend/src/pages/register.html) |
-|  REF002                         |  Tipo de Usuário           | [Geral](./frontend/src/pages/register.html)|
-
-exemplo
-[Aluno](...) [Professor](...)
+| Código | Funcionalidade | Link |
+| ---------------------------- | --------------------------| -------------------------- |
+| REF001 | Cadastro | [Geral](./frontend/src/pages/register.html) |
+| REF002 | Tipo de Usuário | [Aluno](...)  [Professor](...)|
+| REF003 | Login | [Geral](...)|
+| REF004 | Criar Questão | [Aluno](...)  [Professor](...)|
+| REF005 | Lista de Questões | [Aluno](...)  [Professor](...)|
+| REF006 | Criar Partida | [Aluno](...)  [Professor](...)|
+| REF007 | Partida em espera | [Aluno](...)  [Professor](...)|
+| REF008 | Partida Iniciada | [Aluno](...)  [Professor](...)|
+| REF009 | Entrar em Uma Partida | [Aluno](...)|
+| REF010 | Quiz | [Aluno](...)  [Professor](...)|
+| REF011 | Ranking | [Aluno](...)  [Professor](...)|
+| REF012 | Chat | [Aluno](...)  [Professor](...)|
+| REF013 | Histórico de Partidas - Host | [Aluno](...)  [Professor](...)|
+| REF014 | Histórico de Partidas - Competidor | [Aluno](...) |
+| REF015 | Foto de Perfil | [Aluno](...)  [Professor](...)|
+| REF016 | Atualizar Conta | [Aluno](...)  [Professor](...)|

@@ -8,7 +8,7 @@
 
 body {
   font-family: "Sora", sans-serif;
-  background: #d0d0d0;
+  background: #F5F3F7;
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -43,6 +43,7 @@ body {
   display: flex;
   height: 100vh;
   width: 100vw;
+  background-color: #f5f3f7;
 }
 
 .sidebar {
@@ -140,9 +141,7 @@ body {
 
 .content {
   padding: 20px;
-  color: #333;
   height: 100%;
-  background-color: #d0d0d0;
 }
 
 .content header {
@@ -157,7 +156,9 @@ body {
 .content header h2 {
   min-width: 50%;
   font-family: "Sora";
-  color: #909090;
+  font-weight: 700;
+  font-size: 28px;
+  color: #6E4FC8;
 }
 
 .interface-design {
@@ -173,13 +174,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: #5E5D5D;
 }
 
 .info h2{
   font-family: "Sora";
-  font-weight: 800;
+  font-weight: 600;
   font-size: 26px;
-  color: #333;
+  color: #6E4FC8;
 }
 
 .info h4 {
@@ -193,6 +195,7 @@ body {
   font-weight: 600;
   font-size: 16px;
   margin-left: 2px;
+  color: #5E5D5D;
 }
 
 .info img {
@@ -218,7 +221,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 60%;
+  height: 70%;
 }
 
 .section-list {
@@ -247,7 +250,9 @@ body {
 .results h4 {
   margin-bottom: 10px;
   font-family: "Sora";
-  font-weight: 800;
+  font-size: 20px;
+  color: #6E4FC8;
+  font-weight: 700;
 }
 
 .question-container {
@@ -368,4 +373,5 @@ footer {
 
 main{
   margin-left: 6vw;
+  background-color: #f5f3f7;
 }

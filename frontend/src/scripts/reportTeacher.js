@@ -10,11 +10,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const setphoto = await getPhoto(userId);
 
-    const idMatch = "66f1f220a552d5e7ecfe4f86"
-    /////////////////////////////////////////////////////////////localStorage.getItem("idMatch--");
+    const idMatch = localStorage.getItem("reportMatchID");
 
     if (!idMatch) {
-        /////////////////////////////////////////////////// MUDAR
         window.location.href = "../../index.html";
     }
 
