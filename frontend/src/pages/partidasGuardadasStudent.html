@@ -143,7 +143,7 @@
     </main>
 
     <script>
-      let matchToDelete = null; // Variável para armazenar a partida que será deletada
+    let matchToDelete = null; // Variável para armazenar a partida que será deletada
       let partidas = []; // Array global para armazenar as partidas
       let userId; // Variável global para o ID do usuário
 
@@ -172,6 +172,92 @@
         }
       }
 
+      function renderMatches(matches) {
+        const partidasContainer = document.getElementById("partidasContainer");
+        const semPartidasContainer = document.getElementById("semPartidas");
+
+        partidasContainer.innerHTML = ""; // Limpa o conteúdo
+
+        if (matches.length === 0) {
+          semPartidasContainer.style.display = "block";
+          partidasContainer.style.display = "none";
+        } else {
+          semPartidasContainer.style.display = "none";
+
+          matches.forEach((match) => {
+            const card = document.createElement("div");
+            card.classList.add("card-partida-guardada");
+
+            const conteudoCard = document.createElement("div");
+            conteudoCard.classList.add("conteudo-card");
+            conteudoCard.innerHTML = `
+          
+    <h3>${match.name} </h3>
+    <span>
+        <img src="../../assets/icon/Grid.svg" alt="Ícone de Descrição" class="icone-texto" /> 
+        ${match.description}
+    </span>
+    <span>
+        <img src="../../assets/icon/Grid.svg" alt="Ícone de Data" class="icone-texto" /> 
+        ${match.data} - ${match.time}
+    </span>
+    <span>
+        <img src="../../assets/icon/iconDeletar.svg" alt="Ícone de Tempo" class="icone-texto" /> 
+        Tempo de questão: ${match.question_times} seg
+    </span>
+    <span>
+        <img src="caminho/para/icon-questoes.svg" alt="Ícone de Questões" class="icone-texto" /> 
+        ${match.questions.length} questões
+    </span>
+    console.log(${match.description})
+`;
+
+            const botoes = document.createElement("div");
+            botoes.classList.add("botoes");
+
+            const iniciar = document.createElement("span");
+            iniciar.classList.add("iniciar");
+            iniciar.textContent = "Iniciar";
+            iniciar.id = "iniciarPartida";
+
+            // Adiciona evento para iniciar a partida
+            iniciar.addEventListener("click", async () => {
+              localStorage.setItem("waitingMatchId", match._id);
+              await startMatch();
+            });
+
+            const editar = document.createElement("span");
+            editar.classList.add("editar");
+            editar.setAttribute("data-id", match._id);
+            editar.textContent = "Editar";
+            editar.addEventListener("click", () => {
+              localStorage.setItem("waitingMatchId", match._id);
+              window.location.href = "editarPartida.html";
+            });
+
+            const deletar = document.createElement("span");
+            deletar.classList.add("deletar");
+            deletar.setAttribute("data-idwaiting", match._id);
+            deletar.innerHTML = `<img src="../../assets/icon/deletar.svg" alt="Deletar" />`;
+            deletar.addEventListener("click", () => {
+              openDeleteModal(match._id, card);
+            });
+
+            const duplicar = document.createElement("span");
+            duplicar.classList.add("duplicar");
+            duplicar.textContent = "Duplicar";
+            duplicar.addEventListener("click", () => {
+              showDuplicateModal(match._id); // Chama a função que abre o modal
+            });
+
+            // Monta os botões
+            botoes.append(iniciar, editar, deletar, duplicar);
+            card.append(conteudoCard, botoes);
+
+            partidasContainer.appendChild(card);
+          });
+        }
+      }
 
       // Editar partida guardada
       // Variável global para armazenar o ID da partida atual
@@ -182,6 +268,12 @@
         currentMatchId = matchId; // Armazena o ID da partida que será duplicada
         document.getElementById("duplicateModal").style.display = "flex"; // Exibe o modal
       }
+
+      const logoutButton = document.getElementById("logout");
+        logoutButton.addEventListener("click", function () {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("occupation");
+    });
 
       // Fecha o modal de duplicação
       function closeDuplicateModal() {
@@ -231,7 +323,6 @@
           }
 
           const data = await response.json();
-          console.log(data);
           fetchUserMatches();
         } catch (error) {
           console.error(error);
@@ -331,6 +422,28 @@
       // Carrega as partidas quando o DOM é carregado
       document.addEventListener("DOMContentLoaded", fetchUserMatches);
 
+      document.addEventListener("DOMContentLoaded", async () => {
+        const setphoto = await getPhoto(localStorage.getItem("userId"));
+      });
+
+      const getPhoto = async (idUSer) => {    
+    try {
+        const response = await fetch(`http://localhost:3000/profile-photo/${idUSer}`, {
+        headers: {'Content-Type': 'multipart/form-data',},
+    });
+        if (response.ok) {
+            const blob = await response.blob();
+            const imgURL = URL.createObjectURL(blob);
+            localStorage.setItem("profilePhoto", imgURL);
+            const img = document.getElementById("profile-photo");
+            img.src = imgURL;
+        } else {
+            console.error('Erro ao enviar o arquivo:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+  }
       // Seletores para os filtros
       const filtroSemestre = document.getElementById("filtroSemestre");
       const pesquisarPartida = document.getElementById("pesquisarPartida");
@@ -419,12 +532,7 @@
         }
 
         try {
-          // Buscar os dados da waiting match
-          const waitingMatchData = await getWaitingMatchData(waitingMatchId);
-
-          console.log(waitingMatchData);
-
-          // Criar a nova partida usando os dados da waiting match
+          const waitingMatchData = await getWaitingMatchData(waitingMatchId);;
           const response = await fetch("http://localhost:3000/match", {
             method: "POST",
             headers: {
@@ -441,19 +549,14 @@
               _id_waiting_match: waitingMatchId, // ID da waiting match
             }),
           });
-
-          if (!response.ok) {
-            throw new Error("Erro ao criar a partida.");
-          }
-
-          const matchResult = await response.json();
-          console.log("Partida criada com sucesso:", matchResult);
-          localStorage.setItem("matchId", data.id_match);
+          if (response.ok) {
+            const matchResult = await response.json();
+          localStorage.setItem("matchId", matchResult.id_match);
           localStorage.setItem("matchRole", "HOST");
           window.location.href = "../pages/MatchScreen.html";
+          }
         } catch (error) {
           console.error("Erro ao iniciar a partida:", error);
-          alert("Erro ao iniciar a partida. Tente novamente.");
         }
       }
 
@@ -529,13 +632,7 @@
             partidasContainer.appendChild(card);
           });
         }
-      }
-
-      const logoutButton = document.getElementById("logout");
-    logoutButton.addEventListener("click", function () {
-        localStorage.removeItem("userId");
-        localStorage.removeItem("occupation");
-    });
+      }  
     </script>
   </body>
 </html>
