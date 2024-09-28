@@ -28,7 +28,7 @@ Uma aplicação web que permite que usuários criem partidas, criando perguntas 
 |  Marcos Vinicius Costa Souza    |  Conteudista & Frontend    |
 |  Nicole Amanda Do Nascimento Damacena   |  UI Designer       |
 
-<a name="Como rodar"></a>
+<a name="como-rodar"></a>
 
 ## :grey_question: Como rodar
 
