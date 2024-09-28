@@ -81,6 +81,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           "Content-Type": "application/json",
         },
       });
+      if (response.ok) {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("occupation");
+        window.location.href = "../../index.html";
+      }
     } catch (error) {
       console.error("Erro na requisição:", error);
     }

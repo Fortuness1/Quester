@@ -194,24 +194,22 @@ main {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Duas colunas */
-  gap: 20px; /* Espaçamento entre os cards */
-  padding: 20px; /* Espaçamento interno do container */
+  gap: 20px; /* Espaçamento entre os cards */ /* Espaçamento interno do container */
 }
 
 .card-partida-guardada {
   width: 100%;
 }
 .card {
-  width: 620px;
-  margin: 10px 0;
+  width: 83%;
   background-color: white;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 10px 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .card p{
@@ -319,6 +317,14 @@ button {
   background-color: #e65c00; /* Cor de fundo um pouco mais escura ao passar o mouse */
 }
 
+.historico-host{
+  width: 80%;
+}
+
+.historico-host2{
+  width: 100%;
+}
+
 .container-texto-imagem {
   position: relative; /* Define o contêiner como referência para posicionamento absoluto */
   width: fit-content; /* Define que o contêiner ajuste ao tamanho do conteúdo (a imagem) */
@@ -390,11 +396,10 @@ button:hover {
   gap: 20px; /* Espaço entre os cards */
   width: 80vw;
   padding: 20px;
-  justify-items: center;
 }
 
 .escolherHistorico {
-  width: 100%;
+  width: 97%;
   display: flex;
   flex-direction: row;
   align-items: center;

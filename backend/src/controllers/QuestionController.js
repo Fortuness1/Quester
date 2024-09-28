@@ -149,7 +149,6 @@ exports.deleteQuestion = async (req, res) => {
             idUserString,
             { $pull: { questions: idQuestion } }
         );
-        const deleteQuestion =  await QuestionModel.findByIdAndDelete(idQuestion);
         return res.status(200).json({ status: "question deleted" });
     } catch (err) {
         console.log(err)

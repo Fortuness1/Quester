@@ -21,12 +21,12 @@
         </li>
         <li class="sidebar-item menu" title="Criar Partida">
           <a href="./criarPartidaStudent.html">
-            <img src="../../assets/icon/iconcreate-select.svg" alt="Play" />
+            <img src="../../assets/icon/add-square.svg" alt="Play" />
           </a>
         </li>
         <li class="sidebar-item menu" title="Partidas Guardadas">
           <a href="./partidasGuardadasStudent.html">
-            <img src="../../assets/icon/Grid.svg" alt="Lista de Questões" />
+            <img src="../../assets/icon/icon-select-grid.svg" alt="Lista de Questões" />
           </a>
         </li>
         <li class="sidebar-item menu" title="Lista de Questões">
@@ -81,11 +81,6 @@
           placeholder="Pesquise pelo título da partida"
           id="pesquisarPartida"
         />
-        <img
-          src="../../assets/icon/iconLupa.svg"
-          alt="Pesquisar"
-          class="icon-lupa"
-        />
       </div>
 
       <!-- Div de partidas guardadas -->
@@ -103,24 +98,12 @@
         <div class="container-mascote">
           <img src="../../assets/img/confiante.svg" alt="" />
           <div class="container-texto-imagem">
-            <img
-              src="../../assets/img/caixaPerguntaPG.png"
-              alt="Balão de Texto"
-              class="balao-img"
-            />
-            <div class="texto-sobre-balao">
-              <h2>Uau, que vazio...</h2>
-              <p>
-                Você ainda não possui nenhuma partida salva.<br />Que tal criar
-                sua primeira partida?
-              </p>
-            </div>
           </div>
           <!-- Aqui estava faltando o fechamento -->
 
           <span
             class="crie-partida"
-            onclick="window.location.href='criarPartida.html'"
+            onclick="window.location.href='./criarPartidaStudent.html'"
             >Criar sua primeira partida</span
           >
         </div>
@@ -188,92 +171,6 @@
         }
       }
 
-      function renderMatches(matches) {
-        const partidasContainer = document.getElementById("partidasContainer");
-        const semPartidasContainer = document.getElementById("semPartidas");
-
-        partidasContainer.innerHTML = ""; // Limpa o conteúdo
-
-        if (matches.length === 0) {
-          semPartidasContainer.style.display = "block";
-          partidasContainer.style.display = "none";
-        } else {
-          semPartidasContainer.style.display = "none";
-
-          matches.forEach((match) => {
-            const card = document.createElement("div");
-            card.classList.add("card-partida-guardada");
-
-            const conteudoCard = document.createElement("div");
-            conteudoCard.classList.add("conteudo-card");
-            conteudoCard.innerHTML = `
-          
-    <h3>${match.name} </h3>
-    <span>
-        <img src="../../assets/icon/Grid.svg" alt="Ícone de Descrição" class="icone-texto" /> 
-        ${match.description}
-    </span>
-    <span>
-        <img src="../../assets/icon/Grid.svg" alt="Ícone de Data" class="icone-texto" /> 
-        ${match.data} - ${match.time}
-    </span>
-    <span>
-        <img src="../../assets/icon/iconDeletar.svg" alt="Ícone de Tempo" class="icone-texto" /> 
-        Tempo de questão: ${match.question_times} seg
-    </span>
-    <span>
-        <img src="caminho/para/icon-questoes.svg" alt="Ícone de Questões" class="icone-texto" /> 
-        ${match.questions.length} questões
-    </span>
-    console.log(${match.description})
-`;
-
-            const botoes = document.createElement("div");
-            botoes.classList.add("botoes");
-
-            const iniciar = document.createElement("span");
-            iniciar.classList.add("iniciar");
-            iniciar.textContent = "Iniciar";
-            iniciar.id = "iniciarPartida";
-
-            // Adiciona evento para iniciar a partida
-            iniciar.addEventListener("click", async () => {
-              localStorage.setItem("waitingMatchId", match._id); // Salva o ID da partida no localStorage
-              await startMatch(); // Chama a função que inicia a partida
-            });
-
-            const editar = document.createElement("span");
-            editar.classList.add("editar");
-            editar.setAttribute("data-id", match._id);
-            editar.textContent = "Editar";
-            editar.addEventListener("click", () => {
-              localStorage.setItem("waitingMatchId", match._id);
-              window.location.href = "editarPartida.html";
-            });
-
-            const deletar = document.createElement("span");
-            deletar.classList.add("deletar");
-            deletar.setAttribute("data-idwaiting", match._id);
-            deletar.innerHTML = `<img src="../../assets/icon/deletar.svg" alt="Deletar" />`;
-            deletar.addEventListener("click", () => {
-              openDeleteModal(match._id, card);
-            });
-
-            const duplicar = document.createElement("span");
-            duplicar.classList.add("duplicar");
-            duplicar.textContent = "Duplicar";
-            duplicar.addEventListener("click", () => {
-              showDuplicateModal(match._id); // Chama a função que abre o modal
-            });
-
-            // Monta os botões
-            botoes.append(iniciar, editar, deletar, duplicar);
-            card.append(conteudoCard, botoes);
-
-            partidasContainer.appendChild(card);
-          });
-        }
-      }
 
       // Editar partida guardada
       // Variável global para armazenar o ID da partida atual
@@ -333,9 +230,7 @@
           }
 
           const data = await response.json();
-          console.log(data); // Mensagem de sucesso
-          alert("Partida duplicada com sucesso!");
-          // window.location.reload();
+          console.log(data);
           fetchUserMatches();
         } catch (error) {
           console.error(error);
@@ -527,13 +422,13 @@
           const waitingMatchData = await getWaitingMatchData(waitingMatchId);
 
           // Criar a nova partida usando os dados da waiting match
-          const response = await fetch("http://localhost:3000/match/create", {
+          const response = await fetch("http://localhost:3000/match", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              _id: waitingMatchData._id, // ID do usuário
+              _id: localStorage.getItem("userId"), // ID do usuário
               name: waitingMatchData.name,
               description: waitingMatchData.description,
               question_times: waitingMatchData.question_times,
@@ -549,9 +444,10 @@
           }
 
           const matchResult = await response.json();
-          alert("Partida iniciada com sucesso!");
-          // Redirecionar ou atualizar a tela conforme necessário
-          window.location.href = `match/${matchResult.id_match}`;
+          console.log("Partida criada com sucesso:", matchResult);
+          localStorage.setItem("matchId", data.id_match);
+          localStorage.setItem("matchRole", "HOST");
+          window.location.href = "../pages/MatchScreen.html";
         } catch (error) {
           console.error("Erro ao iniciar a partida:", error);
           alert("Erro ao iniciar a partida. Tente novamente.");
@@ -611,14 +507,14 @@
             const deletar = document.createElement("span");
             deletar.classList.add("deletar");
             deletar.setAttribute("data-idwaiting", match._id);
-            deletar.innerHTML = `<img src="../../assets/icon/iconDeletar.svg" alt="Deletar" />`;
+            deletar.innerHTML = `<img src="../../assets/icon/icon-delete.svg" alt="Deletar" />`;
             deletar.addEventListener("click", () => {
               openDeleteModal(match._id, card);
             });
 
             const duplicar = document.createElement("span");
             duplicar.classList.add("duplicar");
-            duplicar.innerHTML = `<img src="../../assets/icon/iconDuplicar.svg" alt="Deletar" />`;
+            duplicar.innerHTML = `<img src="../../assets/icon/bx_duplicate.svg" alt="Duplicar" />`;
             duplicar.addEventListener("click", () => {
               showDuplicateModal(match._id); // Chama a função que abre o modal
             });
@@ -631,6 +527,12 @@
           });
         }
       }
+
+      const logoutButton = document.getElementById("logout");
+    logoutButton.addEventListener("click", function () {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("occupation");
+    });
     </script>
   </body>
 </html>

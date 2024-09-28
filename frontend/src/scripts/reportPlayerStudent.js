@@ -10,11 +10,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const setphoto = await getPhoto(userId);
 
-    const idMatch = "66f1f220a552d5e7ecfe4f86"
+    const idMatch = localStorage.getItem("reportMatchID")
     //localStorage.getItem("idMatch");
 
     if (!idMatch) {
-        /////////////////////////////////////////////////// MUDAR
         window.location.href = "../../index.html";
     }
 
@@ -27,12 +26,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         logoutButton.addEventListener("click", function () {
         localStorage.removeItem("userId");
         localStorage.removeItem("occupation");
-    });
-
-    const backButton = document.getElementById("exit-btn");
-    backButton.addEventListener("click", function () {
-        /////////////////////////////////////////////////// Mudar
-        window.location.href = "";
     });
 });
 

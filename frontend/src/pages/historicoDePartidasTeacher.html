@@ -125,27 +125,7 @@
         if (userId) {
           fetchMatchesHistory(userId);
         }
-
-        const selectedHistory =
-          localStorage.getItem("selectedHistory") || "host"; // 'host' é o padrão
-        updateHistorySelection(selectedHistory);
-
-        // Adicionar evento de clique nos botões
-        document
-          .getElementById("toggleHost")
-          .addEventListener("click", function () {
-            updateHistorySelection("host");
-            localStorage.setItem("selectedHistory", "host"); // Armazena a seleção
-          });
-
-        document
-          .getElementById("toggleParticipante")
-          .addEventListener("click", function () {
-            updateHistorySelection("participante");
-            localStorage.setItem("selectedHistory", "participante"); // Armazena a seleção
-          });
-
-
+        updateHistorySelection("host");
       });
 
       async function fetchMatchesHistory(userId) {
@@ -197,9 +177,8 @@
 
           // Adiciona um evento de clique ao botão "Visualizar"
           visualizar.addEventListener("click", () => {
-            // Lógica para visualizar a partida
-            console.log(`Visualizando partida: ${match._id}`);
-            localStorage.setItem("reportMatchID", match._id); // Salva o ID da partida no Local Storage
+            localStorage.setItem("reportMatchID", match._id);
+            window.location.href = "../pages/reportTeacher.html";
           });
 
           // Adiciona o botão ao card
@@ -257,18 +236,6 @@
           document.querySelector(".historico-host").style.display = "block";
           document.querySelector(".historico-participante").style.display =
             "none";
-          document.getElementById("toggleHost").classList.add("selected");
-          document
-            .getElementById("toggleParticipante")
-            .classList.remove("selected");
-        } else {
-          document.querySelector(".historico-participante").style.display =
-            "block";
-          document.querySelector(".historico-host").style.display = "none";
-          document
-            .getElementById("toggleParticipante")
-            .classList.add("selected");
-          document.getElementById("toggleHost").classList.remove("selected");
         }
       }
 

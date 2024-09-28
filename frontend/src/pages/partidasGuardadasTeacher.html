@@ -546,13 +546,13 @@
           const waitingMatchData = await getWaitingMatchData(waitingMatchId);
 
           // Criar a nova partida usando os dados da waiting match
-          const response = await fetch("http://localhost:3000/match/create", {
+          const response = await fetch("http://localhost:3000/match", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              _id: waitingMatchData._id, // ID do usuário
+              _id: localStorage.getItem("userId"), // ID do usuário
               name: waitingMatchData.name,
               description: waitingMatchData.description,
               question_times: waitingMatchData.question_times,
@@ -563,15 +563,13 @@
             }),
           });
 
-          if (!response.ok) {
-            throw new Error("Erro ao criar a partida.");
-          }
-
-          const matchResult = await response.json();
+          if (response.ok) {
+            const matchResult = await response.json();
           console.log("Partida criada com sucesso:", matchResult);
           localStorage.setItem("matchId", data.id_match);
           localStorage.setItem("matchRole", "HOST");
           window.location.href = "../pages/MatchScreen.html";
+          }
         } catch (error) {
           console.error("Erro ao iniciar a partida:", error);
           alert("Erro ao iniciar a partida. Tente novamente.");
@@ -638,7 +636,7 @@
 
             const duplicar = document.createElement("span");
             duplicar.classList.add("duplicar");
-            duplicar.innerHTML = `<img src="../../assets/icon/bx_duplicate.svg" alt="Deletar" />`;
+            duplicar.innerHTML = `<img src="../../assets/icon/bx_duplicate.svg" alt="Duplicar" />`;
             duplicar.addEventListener("click", () => {
               showDuplicateModal(match._id); // Chama a função que abre o modal
             });

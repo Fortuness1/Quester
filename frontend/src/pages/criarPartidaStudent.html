@@ -21,7 +21,7 @@
         </li>
         <li class="sidebar-item menu" title="Criar Partida">
           <a href="./criarPartidaStudent.html">
-            <img src="../../assets/icon/iconcreate-select.svg" alt="Play" />
+            <img src="../../assets/icon/corret-icon-create.svg" alt="Play" />
           </a>
         </li>
         <li class="sidebar-item menu" title="Partidas Guardadas">
@@ -483,8 +483,9 @@
           const data = await response.json();
 
           if (response.ok) {
-            alert("Partida criada com sucesso!");
-            // Redirecionar ou atualizar a página
+            localStorage.setItem("matchId", data.id_match);
+            localStorage.setItem("matchRole", "HOST");
+            window.location.href = "../pages/MatchScreen.html";
           } else {
             alert(`Erro: ${data.error}`);
           }
@@ -493,62 +494,7 @@
           alert("Erro ao criar a partida.");
         }
       });
-
-      // Função para criar partida
-      document.getElementById("iniciar").addEventListener("click", async () => {
-        const tituloPartida = document
-          .getElementById("tituloPartida")
-          .value.trim();
-        const descricaoPartida = document
-          .getElementById("descricaoPartida")
-          .value.trim();
-        const semestre = document.getElementById("semestre").value;
-        const tempoPergunta = document.getElementById("tempoPergunta").value;
-        const chatAtivo = document.getElementById("toggle1").checked;
-
-        if (
-          !tituloPartida ||
-          !descricaoPartida ||
-          !semestre ||
-          !tempoPergunta
-        ) {
-          alert("Por favor, preencha todos os campos da partida.");
-          return;
-        }
-
-        const partidaData = {
-          _id: localStorage.getItem("userId"),
-          name: tituloPartida,
-          description: descricaoPartida,
-          semester: semestre,
-          question_times: tempoPergunta,
-          chat_availability: chatAtivo,
-          questions: [], // Isso precisaria ser preenchido com as IDs das questões criadas ou selecionadas
-        };
-
-        try {
-          const response = await fetch("http://localhost:3000/match", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(partidaData),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            alert(
-              "Partida criada com sucesso! ID da partida: " + data.id_match
-            );
-          } else {
-            alert(data.error || "Erro ao criar partida.");
-          }
-        } catch (err) {
-          console.error("Erro ao criar partida:", err);
-          alert("Erro ao criar partida.");
-        }
-      });
+      
 
       // Evento para o botão "Guardar" que envia os dados da partida para serem salvos
       document.getElementById("guardar").addEventListener("click", async () => {
@@ -603,11 +549,7 @@
 
           if (response.ok) {
             alert("Partida guardada com sucesso!");
-            // Armazena o ID da partida no sessionStorage
-            sessionStorage.setItem("matchId", data.id_match); // Supondo que o ID da partida é retornado com a chave 'id_match'
-
-            // Aqui você pode limpar os campos ou redirecionar conforme necessário
-            window.location.href = "testePartidasGuardadas.html";
+            window.location.href = "./partidasGuardadasStudent.html";
           } else {
             alert(`Erro: ${data.error}`);
           }

@@ -26,12 +26,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         localStorage.removeItem("userId");
         localStorage.removeItem("occupation");
     });
-
-    const backButton = document.getElementById("exit-btn");
-    backButton.addEventListener("click", function () {
-        /////////////////////////////////////////////////// Mudar
-        window.location.href = "";
-    });
 });
 
 const setInformationMatch = async (idMatch) => {

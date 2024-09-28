@@ -6,6 +6,7 @@ const dateTime = require('../utils/dateTime');
 const DMYdate = require('../utils/DMYdate');
 
 exports.createMatch = async (req, res) => {
+    console.log(req.body);
     const data = new Date()
     const dataTime = dateTime(data);
     const DMYdata = DMYdate(data);
