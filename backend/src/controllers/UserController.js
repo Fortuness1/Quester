@@ -3,7 +3,6 @@ const path = require('path');
 
 exports.createUser = async (req, res) => {
     try {
-        console.log(req.body);
         const email = req.body.email
         let occupation = "TEACHER"
 
@@ -20,8 +19,7 @@ exports.createUser = async (req, res) => {
             occupation: occupation
         });
         
-        await newUser.save();     
-        console.log(newUser._id);   
+        await newUser.save();      
         return res.status(201).json({ _id: newUser._id, occupation:  newUser.occupation });
     } catch (err) {
         if (err.code === 11000 && err.keyPattern.email === 1) {

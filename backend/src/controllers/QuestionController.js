@@ -50,9 +50,7 @@ exports.findQuestions = async (req, res) => {
     try {
         let questionsOBJ = []
         const allQuestions = await UserModel.findById(req.params.id).select('questions');
-        console.log(allQuestions)
         for (let i = 0; i < allQuestions.questions.length; i++) {
-            console.log(allQuestions.questions[i])
             const teste = await QuestionModel.findById(allQuestions.questions[i])
             questionsOBJ.push(teste);
         }
