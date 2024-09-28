@@ -1,4 +1,5 @@
-![Group 5](https://github.com/user-attachments/assets/811f7061-02b7-439f-bbdb-ba1fa2c8dffc)
+
+![Logo-Quester](https://github.com/user-attachments/assets/ca7f3b26-62f3-47ce-ac13-0838167d2d74)
 
 <h4>
   Sumário: 
